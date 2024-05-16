@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/logo-grupo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <script src="js/script.js"></script>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <header>
+        <div class="encabezado">
+            <h1><img class="logo-nav" src="img/isologo-grupo.png" alt="logo agencia de aprendizaje"></h1>
+            <nav class="nav-menu">
+                <ul class="nav-menu">
+                    <li class="nav-link"><a href="login.html">Inicio</a></li>
+                    <li class="nav-link"><a href="alumnos.html">Alumnos</a></li>
+                    <li class="nav-link"><a href="">Profesores</a></li>
+                    <li class="nav-link"><a href="registro.html">Registrarse</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <title>Selección de imágenes</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+    <div class="grid-container">
+        <div class="card" onclick="toggleSelection(this)">
+            <img src="imagen1.jpg" alt="Imagen 1">
+            <p>Descripción de la imagen 1</p>
+        </div>
+        <div class="card" onclick="toggleSelection(this)">
+            <img src="imagen2.jpg" alt="Imagen 2">
+            <p>Descripción de la imagen 2</p>
+        </div>
+        <!-- Agrega más tarjetas según sea necesario -->
+    </div>
+
+    <button onclick="openPopup()">Ver selección</button>
+
+    <div id="popup" style="display: none;">
+        <h2>Imágenes seleccionadas:</h2>
+        <ul id="selected-images"></ul>
+    </div>
+
+    <script>
+        function toggleSelection(card) {
+            card.classList.toggle('selected');
+        }
+
+        function openPopup() {
+            const selectedCards = document.querySelectorAll('.selected');
+            const popup = document.getElementById('popup');
+            const selectedImagesList = document.getElementById('selected-images');
+
+            selectedImagesList.innerHTML = '';
+            selectedCards.forEach(card => {
+                const imgSrc = card.querySelector('img').src;
+                const description = card.querySelector('p').textContent;
+                const listItem = document.createElement('li');
+                const imgElement = document.createElement('img');
+                imgElement.src = imgSrc;
+                imgElement.alt = description;
+                listItem.appendChild(imgElement);
+                listItem.innerHTML += description;
+                selectedImagesList.appendChild(listItem);
+            });
+
+            popup.style.display = 'block';
+        }
+    </script>
+
+</body>
+
+</html>
