@@ -36,8 +36,8 @@
         </div> -->
     </header>
     <main>      
-        
-        <div class="inicio"></div>
+      
+        <!-- <div class="inicio"></div> -->
 
         <section class="secciones" id="seccion3">
             <form class="form-login">
@@ -48,6 +48,7 @@
                     <h1 class="welcome">Formulario de Registro</h1>
                     <p class="welcome">Completa tus datos para registrarte</p>
                 </div>
+
 		<div class="form-input">
 	            <label for="nombre" class="input-label">Nombre</label>
         	    <input type="text" class="email-in" size="40" placeholder=" Escribe tu/s nombre/s " id="nombre" name="nombre">
@@ -59,6 +60,32 @@
 	        <div class="form-input">
         	    <label for="nacimiento" class="input-label">Fecha de nacimiento</label>
 	            <input type="date" class="email-in" id="nacimiento" name="nacimiento">
+
+                <div class="form-input">
+                    <label for="estudios" class="input-label"> Nivel de estudio alcanzado:</label>
+                    <select id="estudios"  name="estudios">
+                        <option value="" selected disabled>Nivel de estudios alcanzados</option>
+                        <option value=" Primario"> Primario </option>
+                        <option value=" Secundario">Secundario </option>
+                        <option value="Terciario "> Terciario </option>
+                        <option value=" Universitario"> Universitario </option>
+                    </select>
+                </div>
+                <br>
+                <div class="form-input">
+                    <label for="" class="input-label">Comision:</label>
+                    <div style="margin-left: 50px;"> 
+                        <input type="radio" name="comision" value="C1" checked>
+                        <label for="">Comision 1</label>
+                        <br>
+                        <input type="radio" name="comision" value="C2">
+                        <label for="">Comision 2</label>
+                        <br>
+                        <input type="radio" name="comision" value="C3">
+                        <label for="">Comision 3</label>
+                        <br>
+                    </div>
+                    <br>
 	        </div class="form-input">
                 <div class="form-input">
                 	<label for="foto">Sube tu foto en formato PDF. PNG o GIF </label>
