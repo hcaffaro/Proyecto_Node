@@ -5,7 +5,7 @@
     font-style: normal;
 }
 
-.encabezado {
+/* .encabezado {
     width: 100vw;
     height: 100px;
     background-color: #fdd306;
@@ -42,7 +42,7 @@
     background-color: lightgray;
     font-size: 1.2em;
     font-weight: bold;
-}
+} */
 
 main{
     display: flex;
@@ -242,7 +242,7 @@ main{
     background-color: #0056b3;
 }
 
-footer {
+/* footer {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -263,7 +263,7 @@ footer {
     width: 300px; 
     height: auto;
     margin-right: auto;
-}
+} */
 
 .form-label {
     /* display: block; */
