@@ -16,10 +16,12 @@ modal.innerHTML=`
             <div class="form-input">
                 <label for="email" class="input-label">Email: </label>
                 <input type="email" id="email" name="email" class="email-in" placeholder="Ingresa tu Email" required>
-            </div class="form-input">
+            </div>
+            <div class="form-input">
                 <label for="password" class="input-label">Contraseña: </label>
                 <input type="password" id="password" name="password" class="password-in" placeholder="Ingresa tu Contraseña" required>
-            <div class="form-input">
+            </div>
+                <div class="form-input">
                 <button type="submit" class="btn-form" >Acceder</button>
             </div>
         </form>

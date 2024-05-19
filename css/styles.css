@@ -5,45 +5,6 @@
     font-style: normal;
 }
 
-/* .encabezado {
-    width: 100vw;
-    height: 100px;
-    background-color: #fdd306;
-    display: flex;
-    justify-content: space-between;
-}
-
-.nav-menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    margin-right: 10px;
-    font-family: "Quicksand", sans-serif;
-    font-size: medium; 
-}
-
-.logo-nav {
-    width: 260px; 
-    height: auto;
-    margin-right: auto;
-    padding-left: 10px;
-    padding-top: 10px;
-}
-
-.nav-link {
-    padding: 20px;
-    font-size: 1.2em;
-    font-weight: 500;
-    color: #250d47;
-}
-
-.nav-link a:hover {
-    background-color: lightgray;
-    font-size: 1.2em;
-    font-weight: bold;
-} */
-
 main{
     display: flex;
     justify-content: center;
@@ -236,34 +197,13 @@ main{
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .btn-form:hover {
     background-color: #0056b3;
 }
-
-/* footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background-color: #333333;  
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center;
-    text-align: center;
-    margin-right: auto; 
-    padding: 20px;
-    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.logo-footer {
-    width: 300px; 
-    height: auto;
-    margin-right: auto;
-} */
 
 .form-label {
     /* display: block; */

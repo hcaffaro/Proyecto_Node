@@ -6,8 +6,8 @@ header {
     align-items: center;
     position: fixed; /* Establece la posición fija del encabezado */
     top: 0; /* Fija el encabezado en la parte superior de la ventana */
-    width: 100%; /* Ocupa todo el ancho de la ventana */
     z-index: 1;
+    width: 100%; 
   }
 
 
@@ -25,11 +25,58 @@ header {
     
   }
 
-  img{
+  .logo-nav img{
     width: 100%;
+
   }
 
+  .logo-nav img:hover{
+      animation: rotar 2s linear;
+  }
 
+  @keyframes rotar {
+    from{
+      transform: rotateY(0deg);
+    }
+    to{
+      transform: rotateY(-360deg);
+    }
+  }
+
+/*   .modalEmail{
+    display: block;
+    width: 80%;
+    padding: 10px;
+    height: 20px;
+    margin: 10px;
+    margin-right: 0;
+    border-radius: 10px;
+    border: 2px solid 0;
+    flex: 1;
+}
+
+  .modalPassword {
+    display: block;
+    width: 80%;
+    padding: 10px;
+    height: 20px;
+    margin: 10px;
+    margin-right: 0;
+    border-radius: 10px;
+    border: 2px solid 0;
+    flex: 1;
+}
+
+.modalBtn{
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+} */
   footer {
 
     background-color: #fdd306;
@@ -65,7 +112,7 @@ header {
 
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 768px) {
     header {
         display: flex;
         flex-direction: column;
