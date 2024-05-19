@@ -41,31 +41,36 @@
 
 		<div class="form-input">
 	            <label for="nombre" class="input-label">Nombre</label>
-        	    <input type="text" class="email-in" size="40" placeholder=" Escribe tu/s nombre/s " id="nombre" name="nombre">
-	        </div class="form-input">
+        	    <input type="text" class="email-in" size="40" placeholder=" Escribe tu/s nombre/s " id="nombre" name="nombre" required>
+                 
+            </div class="form-input">
+
 	        <div class="form-input">
 	            <label for="apellido" class="input-label">Apellido</label>
-	            <input type="text" class="email-in" size="60"  placeholder=" Escribe tu/s apellido/s " id="apellido" name="apellido">
+	            <input type="text" class="email-in" size="60"  placeholder=" Escribe tu/s apellido/s " id="apellido" name="apellido" required>
 	        </div class="form-input">
+
 	        <div class="form-input">
         	    <label for="nacimiento" class="input-label">Fecha de nacimiento</label>
-	            <input type="date" class="email-in" id="nacimiento" name="nacimiento">
+	            <input type="date" class="email-in" id="nacimiento" name="nacimiento" required>
+            </div>
 
                 <div class="form-input">
                     <label for="estudios" class="input-label"> Nivel de estudio alcanzado:</label>
-                    <select id="estudios"  name="estudios">
+                    <select id="estudios"  name="estudios" required>
                         <option value="" selected disabled>Nivel de estudios alcanzados</option>
                         <option value=" Primario"> Primario </option>
                         <option value=" Secundario">Secundario </option>
                         <option value="Terciario "> Terciario </option>
-                        <option value=" Universitario"> Universitario </option>
+                        <option value=" Universitario"> Universitario </option> 
                     </select>
                 </div>
-                <br>
+
+
                 <div class="form-input">
-                    <label for="" class="input-label">Comision:</label>
+                    <label for="" class="input-label">Comision:</label> 
                     <div style="margin-left: 50px;"> 
-                        <input type="radio" name="comision" value="C1" checked>
+                        <input type="radio" name="comision" value="C1"  required> 
                         <label for="">Comision 1</label>
                         <br>
                         <input type="radio" name="comision" value="C2">
@@ -75,11 +80,18 @@
                         <label for="">Comision 3</label>
                         <br>
                     </div>
+
                     <br>
+                    <br>
+                    <br>
+                    
+
 	        </div class="form-input">
                 <div class="form-input">
                 	<label for="foto">Sube tu foto en formato PDF. PNG o GIF </label>
-                	<input type="file" id="foto" name="foto">
+                	<input type="file" id="foto" name="foto" required>
+                </div>
+                <br>
 	        </div class="form-input">
                 <div class="form-input">
                     <button type="submit" class="btn-form" >Finalizar Registro</button>
