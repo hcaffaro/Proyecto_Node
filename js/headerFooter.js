@@ -24,9 +24,9 @@ header.innerHTML = `
                 <a class="nav-link active" href="alumnos.html" >Profesores</a>
               </li>
             </ul>
-            <form class="d-flex" role="login">
+            <!--<form class="d-flex" role="login">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Iniciar sesión</button>
-            </form>
+            </form>-->
           </div>
         </div>
       </nav>
