@@ -1,51 +1,24 @@
-  .group {
-    /*width: 700px; /* Cambia el ancho del contenedor */
-    /*height: 150px; /* Cambia la altura del contenedor */
-    width: auto;
-    height: auto;
-    margin-bottom: 30px; /* Añade margen inferior entre los grupos */
-    background-color: #f4f4f4;
-    padding: 20px;
-    display: flex; 
-    align-items: center;
-    justify-content: space-between; /* Para separar la imagen y el grupo-info */
-    flex-direction: row; 
-  }
-  
-  .group img {
-    width: 120px;
-    height: 120px;
-    margin-top: 20px; /* Mueve la imagen hacia abajo */
-    flex-shrink: 0; /* Hace que la imagen no se expanda */
-  }
-  
-  .group-info {
-    margin-left: 20px;
-    line-height: 1; /* Elimina el espacio entre renglones */
-    flex-grow: 1;
-    font-weight: 20;
-    
-  }
-  
 
-  .description {
-  /*  max-height: 15px; /*limita la altura maxima*/
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    font-family: "Quicksand", sans-serif;
-  }
+  .secciones-gruposConformados {
+    width: 80%;
+    padding: 10px;
+    margin:  auto;
+    margin-bottom: 50px;
+    margin-top: 150px;
   
-  .join-btn {
-    margin-top: auto;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
+    border: 2px solid #1C1A38;
+}
 
+.imgGrupo{
 
-  }
+  max-width: 25% !important;
 
-  .group.expanded {
-    max-height: none; /* Elimina la altura máxima para expandir el contenedor */
-  }
+  aspect-ratio: 1 / 1;
+  
+  object-fit:initial;
+
+}
+
+@media only screen and (max-width: 768px) {
+  .secciones-gruposConformados { margin-top: 200px;}
+}
