@@ -7,30 +7,13 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/headerStyle.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="icon" href="img/logo-grupo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
     <title>Profesores</title>
-        <style>
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .card img {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
 </head>
 
 <body>
@@ -38,74 +21,82 @@
     <header>
     </header>
 
-<!--
-    <title>Selección de imágenes</title>
+    <main>
+        <section class="secciones-profesores" id="seccion4">
+            <div class="grid-container">
+                <div class="card" onclick="toggleSelection(this)">
+                    <img src="./img/01c9f3ec5efe6a444c0c8f630e5d37fe.jpg" alt="Alumno 1">
+                    <div class="container">
+                        <h4> <b>Hernan Caffiaro</b></h4>
+                        <p>Fecha de nacimiento: </p>
+                        <p>Nivel de estudios: </p>
+                        <p>Comision:</p>
+                    </div>
+                </div>
+                <div class="card" onclick="toggleSelection(this)">
+                    <img src="./img/5fa8fdf350405.png" alt="Alumno 2">
+                    <div class="container">
+                        <h4><b>Alan Perez</b></h4>
+                        <p>Fecha de nacimiento:</p>
+                        <p>Nivel de estudios:</p>
+                        <p>Comision:</p>
+                    </div>
+                </div>
+                <div class="card" onclick="toggleSelection(this)">
+                    <img src="./img/5fa8fef6013a2.png" alt="Alumno 3">
+                    <div class="container">
+                        <h4><b>Yanina Nabel</b></h4>
+                        <p>Fecha de nacimiento:</p>
+                        <p>Nivel de estudios:</p>
+                        <p>Comision:</p>
+                    </div>
+                </div>
+                <div class="card" onclick="toggleSelection(this)">
+                    <img src="./img/6979885b413c81abb2cec2b24d9a46fb_1559340707.jpg" alt="Alumno 4">
+                    <div class="container">
+                        <h4><b>Juana Perez</b></h4>
+                        <p>Fecha de nacimiento:</p>
+                        <p>Nivel de estudios:</p>
+                        <p>Comision:</p>
+                    </div>
+                </div>
+                <div class="card" onclick="toggleSelection(this)">
+                    <img src="./img/8b43e10e13d7f3632e167c98815a4be7.jpg" alt="Alumno 5">
+                    <div class="container">
+                        <h4><b>Pedro Sajama</b></h4>
+                        <p>Fecha de nacimiento:</p>
+                        <p>Nivel de estudios:</p>
+                        <p>Comision:</p>
+                    </div>
+                </div>
+                <div class="card" onclick="toggleSelection(this)">
+                    <img src="./img/9b05b95a85192219d940110cfd094ad8.jpg" alt="Alumno 6">
+                    <div class="container">
+                        <h4><b>Ana Garcia</b></h4>
+                        <p>Fecha de nacimiento:</p>
+                        <p>Nivel de estudios:</p>
+                        <p>Comision:</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
--->
-<!-- Los datos y la foto de cada tarjeta seran los que carguen los alumnos en el formulario del Registro -->
-    <div class="grid-container">
-        <div class="card" onclick="toggleSelection(this)">
-            <img src="./img/01c9f3ec5efe6a444c0c8f630e5d37fe.jpg" alt="Alumno 1">
-            <div class="container">
-                <h4> <b>Hernan Caffiaro</b></h4> 
-                <p>Fecha de nacimiento: </p>
-                <p>Nivel de estudios: </p>
-                <p>Comision:</p>
-              </div>            
-        </div>
-        <div class="card" onclick="toggleSelection(this)">
-            <img src="./img/5fa8fdf350405.png" alt="Alumno 2">
-            <div class="container">
-                <h4><b>Alan Perez</b></h4> 
-                <p>Fecha de nacimiento:</p>
-                <p>Nivel de estudios:</p>
-                <p>Comision:</p>
-              </div>            
-        </div>
-        <div class="card" onclick="toggleSelection(this)">
-            <img src="./img/5fa8fef6013a2.png" alt="Alumno 3">
-            <div class="container">
-                <h4><b>Yanina Nabel</b></h4> 
-                <p>Fecha de nacimiento:</p>
-                <p>Nivel de estudios:</p>
-                <p>Comision:</p>
-              </div>            
-        </div>
-        <div class="card" onclick="toggleSelection(this)">
-            <img src="./img/6979885b413c81abb2cec2b24d9a46fb_1559340707.jpg" alt="Alumno 4">
-            <div class="container">
-                <h4><b>Juana Perez</b></h4> 
-                <p>Fecha de nacimiento:</p>
-                <p>Nivel de estudios:</p>
-                <p>Comision:</p>
-              </div>            
-        </div>
-        <div class="card" onclick="toggleSelection(this)">
-            <img src="./img/8b43e10e13d7f3632e167c98815a4be7.jpg" alt="Alumno 5">
-            <div class="container">
-                <h4><b>Pedro Sajama</b></h4> 
-                <p>Fecha de nacimiento:</p>
-                <p>Nivel de estudios:</p>
-                <p>Comision:</p>
-              </div>            
-        </div>
-        <div class="card" onclick="toggleSelection(this)">
-            <img src="./img/9b05b95a85192219d940110cfd094ad8.jpg" alt="Alumno 6">
-            <div class="container">
-                <h4><b>Ana Garcia</b></h4> 
-                <p>Fecha de nacimiento:</p>
-                <p>Nivel de estudios:</p>
-                <p>Comision:</p>
-              </div>            
-        </div>
-        <!-- Agrega más tarjetas según sea necesario -->
-    </div>
+        <section class="secciones-gruposConformados" id="seccion5">
+            <div class="grid-container">
+                <div id="popup">
+                    <h2>Imágenes seleccionadas:</h2>
+                    <div class="card">
+                        <ul id="selected-images"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    <button onclick="openPopup()" type="submit" class="btn-form">Ver selección</button>
 
-    <div id="popup" style="display: none;">
-        <h2>Imágenes seleccionadas:</h2>
-        <ul id="selected-images"></ul>
+
+    <div style="margin-bottom: 295px; transform: translateX(50%);">
+        <button onclick="openPopup()" type="submit" class="btn-form">Ver selección</button>
     </div>
 
     <script>
@@ -134,11 +125,13 @@
             popup.style.display = 'block';
         }
     </script>
-<footer>
-</footer>
+    <footer>
+    </footer>
 
     <script src="js/headerFooter.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 
 </body>
 
