@@ -8,7 +8,7 @@ header.innerHTML = `
 
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="login.html">Inicio</a>
+          <a class="navbar-brand" href="index.html">Inicio</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -18,10 +18,10 @@ header.innerHTML = `
                 <a class="nav-link active" aria-current="page" href="registro.html">Registro</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="gruposConformados.html">Alumnos</a>
+                <a class="nav-link" href="alumnos.html">Alumnos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="alumnos.html" >Profesores</a>
+                <a class="nav-link active" href="profesores.html" >Profesores</a>
               </li>
             </ul>
             <!--<form class="d-flex" role="login">

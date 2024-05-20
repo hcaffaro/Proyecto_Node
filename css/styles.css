@@ -215,7 +215,7 @@ main{
 
 #seccion1,
 #seccion2,
-#seccion3, {
+#seccion3 {
     flex-grow: 1; 
     max-width: 500px; 
     padding: 20px;
@@ -230,7 +230,7 @@ main{
 
     #seccion1,
     #seccion2,
-    #seccion2, {
+    #seccion2 {
         flex-grow: initial; 
         max-width: none; 
         width: 100%; 
