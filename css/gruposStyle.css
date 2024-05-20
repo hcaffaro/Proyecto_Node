@@ -17,6 +17,10 @@
   
   object-fit:initial;
 
+  width: auto;
+  height: 100px;
+  object-fit: scale-down;
+  
 }
 
 @media only screen and (max-width: 768px) {
