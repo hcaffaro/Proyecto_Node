@@ -3,9 +3,10 @@
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+    margin-bottom: 120px;
 }
 
-main{
+main {
     display: flex;
     justify-content: center;
 }
@@ -15,21 +16,21 @@ main{
     flex-direction: row;
     width: 500px;
     padding: 50px;
-    margin-top: 10px;
+    margin-top: 130px;
     margin-bottom: 10px;
     border: 2px solid #1C1A38;
 }
 
 .secciones-formulario {
-    display: flex;    
+    display: flex;
     flex-direction: row;
-    width: 500px; 
+    width: 500px;
     padding: 50px;
     margin-top: 10px;
     margin-bottom: 10px;
     border: 2px solid #1C1A38;
     border-radius: 20px 20px 20px 20px;
-    order: 1;  
+    order: 1;
 }
 
 .secciones-gruposConformados {
@@ -41,6 +42,7 @@ main{
     margin-bottom: 20px;
     border: 2px solid #1C1A38;
 }
+
 #seccion1 {
     color: #1C1A38;
     padding: 20px;
@@ -119,7 +121,7 @@ main{
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-  }
+}
 
 .form-login {
     font-size: 1em;
@@ -135,6 +137,7 @@ main{
     margin: 10px;
     font-weight: bold;
 }
+
 .logo-login {
     width: 100px;
     height: 100px;
@@ -166,15 +169,15 @@ main{
 }
 
 .input-label {
-    width: 100px; 
-    text-align: right; 
-    margin-right: 10px; 
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
     text-align: left;
 }
 
 .input-label-registro {
-    width: 30%; 
-    margin-right: 5%; 
+    width: 30%;
+    margin-right: 5%;
     text-align: right;
 }
 
@@ -192,6 +195,7 @@ main{
 
 .btn-form {
     padding: 10px 20px;
+    display: block;
     background-color: #007bff;
     color: white;
     border: none;
@@ -216,23 +220,183 @@ main{
 #seccion1,
 #seccion2,
 #seccion3 {
-    flex-grow: 1; 
-    max-width: 500px; 
+    flex-grow: 1;
+    max-width: 500px;
     padding: 20px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
-/* Media Query para ajustar el diseño en pantallas más pequeñas */
-@media only screen and (max-width: 768px) {
+.secciones-profesores {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 0px;
+    padding: 750px;
+    margin-top: 130px;
+    margin-bottom: 20px;
+    border-radius: 20px 20px 20px 20px;
+    border: 2px solid #1C1A38;
+}
+
+#seccion4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1450px;
+    padding: 50px;
+    margin-top: 130px;
+    margin-bottom: 20px;
+    border-radius: 20px 20px 20px 20px;
+    border: 2px solid #1C1A38;
+}
+
+#seccion5 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 750px;
+    padding: 50px;
+    margin-top: 130px;
+    margin-bottom: 20px;
+    border-radius: 20px 20px 20px 20px;
+    border: 2px solid #1C1A38;
+}
+
+.grid-container {
+    display: flex;
+    flex-direction: row;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    margin: 8px;
+    padding: 1px;
+    text-align: center;
+}
+
+.card.selected {
+    filter: grayscale();
+}
+
+.card img {
+    width: auto;
+    height: 100px;
+    object-fit: scale-down;
+}
+
+/* Tablet */
+@media (min-width: 576px) and (max-width: 991.98px) {
+
     main {
-        flex-direction: column; 
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .secciones {
+        display: flex;
+        flex-direction: row;
+        width: auto;
+        border: 2px solid #1C1A38;
+    }
+
+    #seccion1,
+    #seccion3 {
+        margin-top: 150px;
     }
 
     #seccion1,
     #seccion2,
-    #seccion2 {
-        flex-grow: initial; 
-        max-width: none; 
-        width: 100%; 
+    #seccion3,
+    #seccion4,
+    #seccion5 {
+        flex-grow: initial;
+        max-width: none;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 20px 20px 20px 20px;
     }
+
+    .grid-container {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 5px;
+    }
+
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 40px 40px 40px 40px;
+        padding: 2px;
+        text-align: center;
+    }
+
+    .card img {
+        width: 50px;
+        height: auto;
+        object-fit: cover;
+        justify-content: center;
+    }
+
+    .secciones-gruposConformados {
+        margin-top: 200px;
+    }
+
+}
+
+/* Móvil */
+@media (max-width: 575.98px) {
+
+    main {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    #seccion1,
+    #seccion3 {
+        margin-top: 200px;
+    }
+
+    #seccion1,
+    #seccion2,
+    #seccion3,
+    #seccion4,
+    #seccion5 {
+        flex-grow: initial;
+        max-width: none;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 20px 20px 20px 20px;
+    }
+
+    .grid-container {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+        gap: 1px;
+    }
+
+    .card {
+        border: 1px solid #ccc;
+        padding: 1px;
+        text-align: center;
+    }
+
+    .card img {
+        width: 10px;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .secciones-gruposConformados {
+        margin-top: 200px;
+    }
+
 }
