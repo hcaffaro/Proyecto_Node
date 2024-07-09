@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/logo-grupo.png">
+    <link rel="stylesheet" href="css/headerStyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Administracion</title>
+
+    <style>
+        .icon {
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        .icon-check {
+            color: green;
+        }
+        .icon-cancel {
+            color: red;
+        }
+
+        .unsubscribe{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 5px;
+        }
+
+        .sendRequest{
+            margin-left: 15px;
+        }
+
+        .request{
+            display: flex;
+            flex-direction: row; 
+            align-items: center; 
+            justify-content: space-between;  
+        }
+
+        .seccion1-solicitudes{
+            align-items: center;
+            margin: 10px;
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+
+    </header>
+
+    <main>
+        <section class="secciones" id="seccion1">
+            <div class="seccion1-solicitudes">
+                <h2 class="seccion1-h2">Solicitudes de alta</h2>
+                <div>                
+                    <ul class="list-group">
+                        <% requests.forEach(function(request) { %>
+                        <li class="list-group-item">
+                            <div class="request">
+                                <div>
+                                    <p>Dni: <%= request.dni %> </p>
+                                    <p>Email: <%= request.email %></p>
+                                </div>
+                                <div class="sendRequest">
+                                    <a href="/approve-request/<%= request.id %>">
+                                        <i class="material-icons icon icon-check">check_circle</i>
+                                    </a>
+                                    <a href="/deny-request/<%= request.id %>">
+                                        <i class="material-icons icon icon-cancel">cancel</i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <% }); %>
+                    </ul>
+                </div>
+
+                <br><hr><br>
+
+                <h2 class="seccion1-h2">Solicitudes de baja</h2>
+                <div>
+                    <ul class="list-group">
+                        <% unsubscribeRequests.forEach(function(request) { %>
+                        <li class="list-group-item">
+                            <div class="unsubscribe">
+                                <p>Email: <%= request.email %></p>
+                                <a href="/approve-unsubscribe/<%= request.id_request %>">
+                                    <i class="material-icons icon icon-check">check_circle</i>
+                                </a>
+                            </div>
+                        </li>
+                        <% }); %>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="secciones" id="seccion2">
+            <form class="form-registro" action="/registerTeacher" method="post">
+                <h2 class="seccion1-h2">Registrar profesores</h2>
+                <br>
+                <div class="form-input">
+                    <label for="email" class="input-label">Email</label>
+                    <input type="email" id="email" name="email" class="email-in" placeholder="Ingresa tu Email" required>
+                </div>
+
+                <div class="form-input">
+                    <label for="nombre" class="input-label">Nombre</label>
+                    <input type="text" class="email-in" size="40" placeholder=" Escribe tu/s nombre/s " id="nombre"
+                        name="nombre" required>
+                </div>
+
+                <div class="form-input">
+                    <label for="apellido" class="input-label">Apellido</label>
+                    <input type="text" class="email-in" size="60" placeholder=" Escribe tu/s apellido/s " id="apellido"
+                        name="apellido" required>
+                </div>
+
+                <div class="form-input">
+                    <label class="input-label">Comision:</label>
+                    <div style="margin-left: 50px;">
+                        <input type="radio" name="comision" value="1" required>
+                        <label>Comision 1</label>
+                        <br>
+                        <input type="radio" name="comision" value="2">
+                        <label>Comision 2</label>
+                        <br>
+                        <input type="radio" name="comision" value="3">
+                        <label>Comision 3</label>
+                        <br>
+                    </div>
+                </div>  
+                <br><br>
+                <div class="form-input">
+                    <button type="submit" class="btn-form" >Registrar</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>    
+
+    </footer>
+
+    <script src="js/headerFooter.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>
