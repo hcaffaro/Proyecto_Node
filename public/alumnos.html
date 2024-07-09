@@ -1,243 +1,110 @@
 <!DOCTYPE html>
-<html lang="zxx">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/gruposStyle.css">
-    <link rel="stylesheet" href="css/headerStyle.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="icon" href="img/logo-grupo.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
-    <title>Cursos y Grupos Conformados</title>
+<html lang="es">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/gruposStyle.css">
+  <link rel="stylesheet" href="css/headerStyle.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="icon" href="img/logo-grupo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+  <title>Cursos y Grupos Conformados</title>
 </head>
 
 <body>
-    <header>
-
-    </header>
-
-    <main>
-      <section class="secciones-gruposConformados" id="seccion-grupos-conformados">
-
-        <div>
-          <h2 class="seccion1-h2">Listado de Alumnos por Comision/Grupo</h2>
-          <p class="seccion2-h2"> Aqui encontras todos los grupos conformados</p>
-        </div>
-
-        <div class="row row-cols-1 row-cols-md-2 g-4">
+  <header></header>
+  <main>
+    <section class="secciones-gruposConformados" id="seccion-grupos-conformados">
+      <div>
+        <h2 class="seccion1-h2">Listado de Alumnos por Comision/Grupo</h2>
+        <p class="seccion2-h2">Aqui encontras todos los grupos conformados</p>
+      </div>
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <% studentGroups.forEach(function(group){ %>
           <div class="col">
             <div class="card" style="max-width: 450px;">
-<!--imagenes de los alumnos-->
-              <div style="max-height: 120px; ">
+              <div style="max-height: 120px;">
                 <div class="row row-cols-sm-2 row-cols-md-4" style="margin: 5px;">
-                  <img class="imgGrupo" src="./img/6979885b413c81abb2cec2b24d9a46fb_1559340707.jpg" alt="Alumno 4">
-                  <img class="imgGrupo" src="./img/5fa8fef6013a2.png" alt="Alumno 3">
-                  <img class="imgGrupo" src="./img/5fa8fdf350405.png" alt="Alumno 2">
-                  <img class="imgGrupo" src="./img/01c9f3ec5efe6a444c0c8f630e5d37fe.jpg" alt="Alumno 1">
+                  <% if (group.student1_photo) { %>
+                    <img class="imgGrupo" src="<%= group.student1_photo %>" alt="Alumno 1">
+                    <% } %>
+                      <% if (group.student2_photo) { %>
+                        <img class="imgGrupo" src="<%= group.student2_photo %>" alt="Alumno 2">
+                        <% } %>
+                          <% if (group.student3_photo) { %>
+                            <img class="imgGrupo" src="<%= group.student3_photo %>" alt="Alumno 3">
+                            <% } %>
+                              <% if (group.student4_photo) { %>
+                                <img class="imgGrupo" src="<%= group.student4_photo %>" alt="Alumno 4">
+                                <% } %>
                 </div>
               </div>
-<!--Informacion del grupo-->
               <div class="card-body">
-                <h4 class="card-title">Grupo 1</h4> 
+                <h4 class="card-title">
+                  <%= group.name_group %>
+                </h4>
                 <p class="card-text">
-                  <p>Comision: 1</p>
-                  <p>Repositorio: </p>
-                  <p>Descripcion: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam aut in earum maiores quasi. Explicabo distinctio aliquid id eveniet ullam assumenda voluptates dolorem, vitae amet quae dolorum quis blanditiis natus.</p>           
-<!--Nombre de alumnos oculto-->
-                <div class="collapse" id="collapseExample1">
+                <p>Comision: <%= group.commission %>
+                </p>
+                <p>Repositorio: <%= group.repos %>
+                </p>
+                <p>Descripcion: <%= group.info %>
+                </p>
+                </p>
+                <div class="collapse" id="collapseExample<%= group.id_group %>">
                   <div class="card card-body">
                     <ul>
-                      <li>Alumno 1</li>
-                      <li>Alumno 2</li>
-                      <li>Alumno 3</li>
-                      <li>Alumno 4</li>
-                    </ul>  
+                      <% if (group.student1_name) { %>
+                        <li>
+                          <%= group.student1_name %>
+                            <%= group.student1_surname %>
+                        </li>
+                        <% } %>
+                          <% if (group.student2_name) { %>
+                            <li>
+                              <%= group.student2_name %>
+                                <%= group.student2_surname %>
+                            </li>
+                            <% } %>
+                              <% if (group.student3_name) { %>
+                                <li>
+                                  <%= group.student3_name %>
+                                    <%= group.student3_surname %>
+                                </li>
+                                <% } %>
+                                  <% if (group.student4_name) { %>
+                                    <li>
+                                      <%= group.student4_name %>
+                                        <%= group.student4_surname %>
+                                    </li>
+                                    <% } %>
+                    </ul>
                   </div>
                 </div>
                 <p class="d-inline-flex gap-1">
-                  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
-                     Ver lista de alumnos
+                  <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseExample<%= group.id_group %>" aria-expanded="false"
+                    aria-controls="collapseExample<%= group.id_group %>">
+                    Ver lista de alumnos
                   </button>
                 </p>
               </div>
+            </div>
           </div>
-        </div>
-<!--Otro grupo-->
-
-<div class="col">
-  <div class="card" style="max-width: 450px;">
-<!--imagenes de los alumnos-->
-    <div style="max-height: 120px; ">
-      <div class="row row-cols-sm-2 row-cols-md-4" style="margin: 5px;">
-        <img class="imgGrupo" src="./img/6979885b413c81abb2cec2b24d9a46fb_1559340707.jpg" alt="Alumno 4">
-        <img class="imgGrupo" src="./img/5fa8fef6013a2.png" alt="Alumno 3">
-        <img class="imgGrupo" src="./img/5fa8fdf350405.png" alt="Alumno 2">
-        <img class="imgGrupo" src="./img/01c9f3ec5efe6a444c0c8f630e5d37fe.jpg" alt="Alumno 1">
+          <% }); %>
       </div>
-    </div>
-<!--Informacion del grupo-->
-    <div class="card-body">
-      <h4 class="card-title">Grupo 2</h4> 
-      <p class="card-text">
-        <p>Comision: 1</p>
-        <p>Repositorio: </p>
-        <p>Descripcion: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam aut in earum maiores quasi. Explicabo distinctio aliquid id eveniet ullam assumenda voluptates dolorem, vitae amet quae dolorum quis blanditiis natus.</p>         
-<!--Nombre de alumnos oculto-->
-      <div class="collapse" id="collapseExample2">
-        <div class="card card-body">
-          <ul>
-            <li>Alumno 5</li>
-            <li>Alumno 6</li>
-            <li>Alumno 7</li>
-            <li>Alumno 8</li>
-          </ul>  
-        </div>
-      </div>
-      <p class="d-inline-flex gap-1">
-        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-           Ver lista de alumnos
-        </button>
-      </p>
-    </div>
-</div>
-</div>
-<!--Otro grupo-->
-
-<div class="col">
-  <div class="card" style="max-width: 450px;">
-<!--imagenes de los alumnos-->
-    <div style="max-height: 120px; ">
-      <div class="row row-cols-sm-2 row-cols-md-4" style="margin: 5px;">
-        <img class="imgGrupo" src="./img/6979885b413c81abb2cec2b24d9a46fb_1559340707.jpg" alt="Alumno 4">
-        <img class="imgGrupo" src="./img/5fa8fef6013a2.png" alt="Alumno 3">
-        <img class="imgGrupo" src="./img/5fa8fdf350405.png" alt="Alumno 2">
-        <img class="imgGrupo" src="./img/01c9f3ec5efe6a444c0c8f630e5d37fe.jpg" alt="Alumno 1">
-      </div>
-    </div>
-<!--Informacion del grupo-->
-    <div class="card-body">
-      <h4 class="card-title">Grupo 3</h4> 
-      <p class="card-text">
-        <p>Comision: 1</p>
-        <p>Repositorio: </p>
-        <p>Descripcion: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam aut in earum maiores quasi. Explicabo distinctio aliquid id eveniet ullam assumenda voluptates dolorem, vitae amet quae dolorum quis blanditiis natus.</p>          
-<!--Nombre de alumnos oculto-->
-      <div class="collapse" id="collapseExample3">
-        <div class="card card-body">
-          <ul>
-            <li>Alumno 9</li>
-            <li>Alumno 10</li>
-            <li>Alumno 11</li>
-            <li>Alumno 12</li>
-          </ul>  
-        </div>
-      </div>
-      <p class="d-inline-flex gap-1">
-        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
-           Ver lista de alumnos
-        </button>
-      </p>
-    </div>
-</div>
-</div>
-<!--Otro grupo-->
-
-<div class="col">
-  <div class="card" style="max-width: 450px;">
-<!--imagenes de los alumnos-->
-    <div style="max-height: 120px; ">
-      <div class="row row-cols-sm-2 row-cols-md-4" style="margin: 5px;">
-        <img class="imgGrupo" src="./img/6979885b413c81abb2cec2b24d9a46fb_1559340707.jpg" alt="Alumno 4">
-        <img class="imgGrupo" src="./img/5fa8fef6013a2.png" alt="Alumno 3">
-        <img class="imgGrupo" src="./img/5fa8fdf350405.png" alt="Alumno 2">
-        <img class="imgGrupo" src="./img/01c9f3ec5efe6a444c0c8f630e5d37fe.jpg" alt="Alumno 1">
-      </div>
-    </div>
-<!--Informacion del grupo-->
-    <div class="card-body">
-      <h4 class="card-title">Grupo 12</h4> 
-      <p class="card-text">
-        <p>Comision: 24125</p>
-        <p>Repositorio: </p>
-        <p>Descripcion: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam aut in earum maiores quasi. Explicabo distinctio aliquid id eveniet ullam assumenda voluptates dolorem, vitae amet quae dolorum quis blanditiis natus.</p>        
-<!--Nombre de alumnos oculto-->
-      <div class="collapse" id="collapseExample4">
-        <div class="card card-body">
-          <ul>
-            <li>Alumno Hernan Caffaro</li>
-            <li>Alumno Alan Perez</li>
-            <li>Alumno Yanina Nabel</li>
-            <li>Alumno Pedro Sajama</li>
-          </ul>  
-        </div>
-      </div>
-      <p class="d-inline-flex gap-1">
-        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">
-           Ver lista de alumnos
-        </button>
-      </p>
-    </div>
-</div>
-</div>
-<!--Otro grupo-->
-
-<div class="col">
-  <div class="card" style="max-width: 450px;">
-<!--imagenes de los alumnos-->
-    <div style="max-height: 120px; ">
-      <div class="row row-cols-sm-2 row-cols-md-4" style="margin: 5px;">
-        <img class="imgGrupo" src="./img/6979885b413c81abb2cec2b24d9a46fb_1559340707.jpg" alt="Alumno 4">
-        <img class="imgGrupo" src="./img/5fa8fef6013a2.png" alt="Alumno 3">
-        <img class="imgGrupo" src="./img/5fa8fdf350405.png" alt="Alumno 2">
-        <img class="imgGrupo" src="./img/01c9f3ec5efe6a444c0c8f630e5d37fe.jpg" alt="Alumno 1">
-      </div>
-    </div>
-<!--Informacion del grupo-->
-    <div class="card-body">
-      <h4 class="card-title">Grupo 5</h4> 
-      <p class="card-text">
-        <p>Comision: 2</p>
-        <p>Repositorio: </p>
-        <p>Descripcion: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam aut in earum maiores quasi. Explicabo distinctio aliquid id eveniet ullam assumenda voluptates dolorem, vitae amet quae dolorum quis blanditiis natus.</p>           
-<!--Nombre de alumnos oculto-->
-      <div class="collapse" id="collapseExample5">
-        <div class="card card-body">
-          <ul>
-            <li>Alumno 20</li>
-            <li>Alumno 21</li>
-            <li>Alumno 22</li>
-            <li>Alumno 23</li>
-          </ul>  
-        </div>
-      </div>
-      <p class="d-inline-flex gap-1">
-        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample5">
-           Ver lista de alumnos
-        </button>
-      </p>
-    </div>
-</div>
-</div>
-<!--Otro grupo-->
-</div>
-
-
-
-      </section>
-    </main>
-
-<footer>
-
-</footer> 
-
-<script src="js/headerFooter.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-
+    </section>
+  </main>
+  <footer></footer>
+  <script src="js/headerFooter.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
