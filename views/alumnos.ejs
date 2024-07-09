@@ -21,8 +21,11 @@
   <main>
     <section class="secciones-gruposConformados" id="seccion-grupos-conformados">
       <div>
+        <br>
         <h2 class="seccion1-h2">Listado de Alumnos por Comision/Grupo</h2>
+        <br>
         <p class="seccion2-h2">Aqui encontras todos los grupos conformados</p>
+        <br><br>
       </div>
       <div class="row row-cols-1 row-cols-md-2 g-4">
         <% studentGroups.forEach(function(group){ %>
@@ -31,16 +34,16 @@
               <div style="max-height: 120px;">
                 <div class="row row-cols-sm-2 row-cols-md-4" style="margin: 5px;">
                   <% if (group.student1_photo) { %>
-                    <img class="imgGrupo" src="<%= group.student1_photo %>" alt="Alumno 1">
+                    <img class="imgGrupo" src="img/<%= group.student1_photo %>" alt="Alumno 1">
                     <% } %>
                       <% if (group.student2_photo) { %>
-                        <img class="imgGrupo" src="<%= group.student2_photo %>" alt="Alumno 2">
+                        <img class="imgGrupo" src="img/<%= group.student2_photo %>" alt="Alumno 2">
                         <% } %>
                           <% if (group.student3_photo) { %>
-                            <img class="imgGrupo" src="<%= group.student3_photo %>" alt="Alumno 3">
+                            <img class="imgGrupo" src="img/<%= group.student3_photo %>" alt="Alumno 3">
                             <% } %>
                               <% if (group.student4_photo) { %>
-                                <img class="imgGrupo" src="<%= group.student4_photo %>" alt="Alumno 4">
+                                <img class="imgGrupo" src="img/<%= group.student4_photo %>" alt="Alumno 4">
                                 <% } %>
                 </div>
               </div>

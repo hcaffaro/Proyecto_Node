@@ -284,22 +284,19 @@ app.post('/create-group', function(req, res) {
     const email = req.query.email;
     let { id_student1, id_student2, id_student3, id_student4, commission } = req.body;
 
-    // Asegúrate de que los IDs de estudiantes no seleccionados sean NULL
     id_student1 = id_student1 || null;
     id_student2 = id_student2 || null;
     id_student3 = id_student3 || null;
     id_student4 = id_student4 || null;
 
-    // Inserta el grupo de estudiantes en la base de datos
     let query = "INSERT INTO `student_groups`(`commission`, `id_student1`, `id_student2`, `id_student3`, `id_student4`) VALUES (?, ?, ?, ?, ?)";
     conexion.query(query, [commission, id_student1, id_student2, id_student3, id_student4], function(err, result) {
         if (err) {
             throw err;
         } else {
-            // Filtra los estudiantes seleccionados (no NULL)
+
             const selectedStudents = [id_student1, id_student2, id_student3, id_student4].filter(id => id !== null);
             
-            // Actualiza el estado `onGroup` de los estudiantes seleccionados
             if (selectedStudents.length > 0) {
                 let updateQuery = "UPDATE `user_data` SET `onGroup` = true WHERE id_data IN (?)";
                 conexion.query(updateQuery, [selectedStudents], function(err) {
@@ -313,6 +310,29 @@ app.post('/create-group', function(req, res) {
                 res.redirect(`/profesores?email=${email}`);
             }
         }
+    });
+});
+
+//render grupos
+app.get('/alumnos', (req, res) => {
+    const query = `
+        SELECT sg.*, 
+               ud1.name as student1_name, ud1.surname as student1_surname, ud1.photo as student1_photo,
+               ud2.name as student2_name, ud2.surname as student2_surname, ud2.photo as student2_photo,
+               ud3.name as student3_name, ud3.surname as student3_surname, ud3.photo as student3_photo,
+               ud4.name as student4_name, ud4.surname as student4_surname, ud4.photo as student4_photo
+        FROM student_groups sg
+        LEFT JOIN user_data ud1 ON sg.id_student1 = ud1.id_data
+        LEFT JOIN user_data ud2 ON sg.id_student2 = ud2.id_data
+        LEFT JOIN user_data ud3 ON sg.id_student3 = ud3.id_data
+        LEFT JOIN user_data ud4 ON sg.id_student4 = ud4.id_data
+    `;
+
+    conexion.query(query, (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.render('alumnos', { studentGroups: results });
     });
 });
 

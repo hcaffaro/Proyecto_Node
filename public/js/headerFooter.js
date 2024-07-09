@@ -21,7 +21,7 @@ header.innerHTML = `
                     <a class="nav-link active" aria-current="page" id="navPerfil" href='/perfil?email=${email}' >Mi perfil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" id="navAlumnos" href="alumnos.html">Grupos conformados</a>
+                    <a class="nav-link active" id="navAlumnos" href='/alumnos'>Grupos conformados</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" id="navProfesores" href='/profesores?email=${email}'>Armado de grupos</a>
