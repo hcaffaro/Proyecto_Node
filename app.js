@@ -87,7 +87,7 @@ app.get('/perfil', function (req, res) {
             if (rows.length > 0) {
                 let idUser = rows[0].id_data;
                 if (idUser !== null) {
-                    let query = "SELECT `name`, `surname`, `birthdate`, `schooling`, `commission`, `photo` FROM `user_data` WHERE id_data = ?";
+                    let query = "SELECT * FROM `user_data` WHERE id_data = ?";
                     conexion.query(query, [idUser], function (error, result) {
                         if (error) throw error;
                         result[0].birthdate = moment(result[0].birthdate).format('DD/MM/YYYY');
@@ -155,7 +155,7 @@ app.get('/admin', function (req, res) {
 });
 
 // aprobar solicitud de alta
-app.get('/approve-request/:id', function (req, res) {
+app.get('/approveRequest/:id', function (req, res) {
     const requestId = req.params.id;
 
     let query = 'SELECT * FROM access_requests WHERE id = ?';
@@ -178,7 +178,7 @@ app.get('/approve-request/:id', function (req, res) {
 });
 
 // negar solicitud de alta
-app.get('/deny-request/:id', function (req, res) {
+app.get('/denyRequest/:id', function (req, res) {
     const requestId = req.params.id;
 
     const query = 'DELETE FROM access_requests WHERE id = ?';
@@ -189,7 +189,7 @@ app.get('/deny-request/:id', function (req, res) {
 });
 
 // aprobar solicitud de baja
-app.get('/approve-unsubscribe/:id', function (req, res) {
+app.get('/approveUnsubscribe/:id', function (req, res) {
     
     const requestId = req.params.id;
 
@@ -280,7 +280,7 @@ app.get('/profesores', function (req, res) {
 });
 
 // registar grupo
-app.post('/create-group', function(req, res) {
+app.post('/createGroup', function(req, res) {
     const email = req.query.email;
     let { id_student1, id_student2, id_student3, id_student4, commission } = req.body;
 

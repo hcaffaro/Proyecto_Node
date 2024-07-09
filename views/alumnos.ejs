@@ -59,7 +59,7 @@
                 <p>Descripcion: <%= group.info %>
                 </p>
                 </p>
-                <div class="collapse" id="collapseExample<%= group.id_group %>">
+                <div class="collapse" id="collapseGroup<%= group.id_group %>">
                   <div class="card card-body">
                     <ul>
                       <% if (group.student1_name) { %>
@@ -91,8 +91,8 @@
                 </div>
                 <p class="d-inline-flex gap-1">
                   <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseExample<%= group.id_group %>" aria-expanded="false"
-                    aria-controls="collapseExample<%= group.id_group %>">
+                    data-bs-target="#collapseGroup<%= group.id_group %>" aria-expanded="false"
+                    aria-controls="collapseGroup<%= group.id_group %>">
                     Ver lista de alumnos
                   </button>
                 </p>

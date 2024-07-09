@@ -70,10 +70,10 @@
                                     <p>Email: <%= request.email %></p>
                                 </div>
                                 <div class="sendRequest">
-                                    <a href="/approve-request/<%= request.id %>">
+                                    <a href="/approveRequest/<%= request.id %>">
                                         <i class="material-icons icon icon-check">check_circle</i>
                                     </a>
-                                    <a href="/deny-request/<%= request.id %>">
+                                    <a href="/denyRequest/<%= request.id %>">
                                         <i class="material-icons icon icon-cancel">cancel</i>
                                     </a>
                                 </div>
@@ -92,7 +92,7 @@
                         <li class="list-group-item">
                             <div class="unsubscribe">
                                 <p>Email: <%= request.email %></p>
-                                <a href="/approve-unsubscribe/<%= request.id_request %>">
+                                <a href="/approveUnsubscribe/<%= request.id_request %>">
                                     <i class="material-icons icon icon-check">check_circle</i>
                                 </a>
                             </div>
