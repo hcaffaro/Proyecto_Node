@@ -25,27 +25,27 @@
             <div class="grid-container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
                     <% users.forEach(function(user){ %>
-                        <div class="col">
-                            <div class="card" onclick="toggleSelection(this)">
-                                <img src="/img/<%= user.photo %>" alt="Alumno <%= user.id_data %>">
-                                <div class="container">
-                                    <h4><b>
-                                            <%= user.name %>
-                                                <%= user.surname %>
-                                        </b></h4>
-                                    <p><strong>Fecha de Nacimiento:</strong>
-                                        <%= user.birthdate %>
-                                    </p>
-                                    <p><strong>Nivel de Estudios:</strong>
-                                        <%= user.schooling %>
-                                    </p>
-                                    <p><strong>Comisión:</strong>
-                                        <%= user.commission %>
-                                    </p>
-                                </div>
+                    <div class="col">
+                        <div class="card" onclick="toggleSelection(this)">
+                            <img src="/img/<%= user.photo %>" alt="Alumno <%= user.id_data %>">
+                            <div class="container">
+                                <h4><b>
+                                        <%= user.name %>
+                                        <%= user.surname %>
+                                    </b></h4>
+                                <p><strong>Fecha de Nacimiento:</strong>
+                                    <%= user.birthdate %>
+                                </p>
+                                <p><strong>Nivel de Estudios:</strong>
+                                    <%= user.schooling %>
+                                </p>
+                                <p><strong>Comisión:</strong>
+                                    <%= user.commission %>
+                                </p>
                             </div>
                         </div>
-                        <% }); %>
+                    </div>
+                    <% }); %>
                 </div>
             </div>
         </section>
@@ -61,8 +61,9 @@
                     <input type="hidden" name="id_student2" id="id_student2">
                     <input type="hidden" name="id_student3" id="id_student3">
                     <input type="hidden" name="id_student4" id="id_student4">
-                    <input type="hidden" name="commission" id="commission" value="<%= users[0].commission %>">
-                    <button type="submit" class="btn-form">Armar grupo</button>
+                    <input type="hidden" name="commission" id="commission"
+                        value="<%= users.length > 0 ? users[0].commission : '' %>">
+                    <button type="submit" class="btn-form" id="armarGrupoBtn" disabled>Armar grupo</button>
                 </form>
             </div>
         </section>
@@ -71,6 +72,7 @@
     <script>
         const maxSelection = 4;
         const selectedContainer = document.getElementById('selected-container');
+        const armarGrupoBtn = document.getElementById('armarGrupoBtn');
 
         function toggleSelection(card) {
             const selectedCards = document.querySelectorAll('.secciones-profesores .card.selected');
@@ -100,6 +102,7 @@
             colDiv.classList.add('col');
             colDiv.appendChild(clone);
             selectedContainer.appendChild(colDiv);
+            updateArmarGrupoButton();
         }
 
         function removeSelectedCard(card) {
@@ -110,16 +113,28 @@
                     break;
                 }
             }
+            updateArmarGrupoButton();
         }
 
         function updateFormInputs() {
             const selectedCards = document.querySelectorAll('.secciones-profesores .card.selected');
             for (let i = 0; i < maxSelection; i++) {
                 if (selectedCards[i]) {
-                    document.getElementById(`id_student${i + 1}`).value = selectedCards[i].querySelector('img').alt.split(' ')[1];
+                    document.getElementById(`id_student${i + 1}`).value = selectedCards[i].querySelector('img').alt
+                        .split(' ')[1];
                 } else {
                     document.getElementById(`id_student${i + 1}`).value = '';
                 }
+            }
+            updateArmarGrupoButton();
+        }
+
+        function updateArmarGrupoButton() {
+            const selectedCards = document.querySelectorAll('.secciones-profesores .card.selected');
+            if (selectedCards.length > 0) {
+                armarGrupoBtn.removeAttribute('disabled');
+            } else {
+                armarGrupoBtn.setAttribute('disabled', 'disabled');
             }
         }
 

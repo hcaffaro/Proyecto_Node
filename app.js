@@ -253,7 +253,7 @@ app.post('/registerTeacher', function (req, res) {
     });
 });
 
-// render armar grupos
+// render profesores
 app.get('/profesores', function (req, res) {
     const email = req.query.email;
 
