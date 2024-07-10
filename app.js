@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("mysql");
 const path = require('path');
 const moment = require('moment');
+const multer = require('multer');
 
 const app = express();
 
@@ -20,6 +21,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
+
+//configurar multer 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/img'); // Directorio donde se guardarán las imágenes
+    },
+    filename: function (req, file, cb) {
+        const uniqueFileName = `${req.params.id}_${file.originalname}`;
+        cb(null, uniqueFileName);
+    }
+});
+
+const upload = multer({ storage: storage });
 // registro User
 app.post("/registrar", function (req, res) {
     const { registroEmail, registroDni } = req.body;
@@ -92,7 +106,7 @@ app.get('/perfil', function (req, res) {
                         if (error) throw error;
                         result[0].birthdate = moment(result[0].birthdate).format('DD/MM/YYYY');
 
-                        res.render('perfil', { user: result[0], email : email });
+                        res.render('perfil', { user: result[0], email: email });
                     });
                 } else {
                     res.redirect(`/registro?email=${email}`);
@@ -137,7 +151,7 @@ app.post('/dataSave', function (req, res) {
 
 // render admin
 app.get('/admin', function (req, res) {
-    
+
     const accessQuery = 'SELECT * FROM access_requests';
     conexion.query(accessQuery, function (err, accessRequests) {
         if (err) throw err;
@@ -190,7 +204,7 @@ app.get('/denyRequest/:id', function (req, res) {
 
 // aprobar solicitud de baja
 app.get('/approveUnsubscribe/:id', function (req, res) {
-    
+
     const requestId = req.params.id;
 
     let query = 'SELECT * FROM unsubscribe_request WHERE id_request = ?';
@@ -223,7 +237,7 @@ app.post('/registerTeacher', function (req, res) {
     const { email, nombre, apellido, comision } = req.body;
 
     let dataUser = "INSERT INTO `user_data`(`name`, `surname`, `commission`,`onGroup`) VALUES (?, ?, ?)";
-    let valores = [nombre, apellido, comision,true];
+    let valores = [nombre, apellido, comision, true];
 
     conexion.query(dataUser, valores, function (error, result) {
         if (error) {
@@ -280,7 +294,7 @@ app.get('/profesores', function (req, res) {
 });
 
 // registar grupo
-app.post('/createGroup', function(req, res) {
+app.post('/createGroup', function (req, res) {
     const email = req.query.email;
     let { id_student1, id_student2, id_student3, id_student4, commission } = req.body;
 
@@ -290,16 +304,16 @@ app.post('/createGroup', function(req, res) {
     id_student4 = id_student4 || null;
 
     let query = "INSERT INTO `student_groups`(`commission`, `id_student1`, `id_student2`, `id_student3`, `id_student4`) VALUES (?, ?, ?, ?, ?)";
-    conexion.query(query, [commission, id_student1, id_student2, id_student3, id_student4], function(err, result) {
+    conexion.query(query, [commission, id_student1, id_student2, id_student3, id_student4], function (err, result) {
         if (err) {
             throw err;
         } else {
 
             const selectedStudents = [id_student1, id_student2, id_student3, id_student4].filter(id => id !== null);
-            
+
             if (selectedStudents.length > 0) {
                 let updateQuery = "UPDATE `user_data` SET `onGroup` = true WHERE id_data IN (?)";
-                conexion.query(updateQuery, [selectedStudents], function(err) {
+                conexion.query(updateQuery, [selectedStudents], function (err) {
                     if (err) {
                         throw err;
                     } else {
@@ -356,29 +370,59 @@ app.get('/editPerfil/:id', function (req, res) {
     });
 });
 
-// handle profile update
-app.post('/updatePerfil/:id', function (req, res) {
+// Ruta para actualizar datos del perfil y cambiar imagen de perfil
+app.post('/updatePerfil/:id', upload.single('fotoPerfil'), function (req, res) {
     const requestId = req.params.id;
     const { nombre, apellido, nacimiento, estudios, comision, password } = req.body;
     const email = req.body.email;
 
-    let updateData = "UPDATE `user_data` SET `name`=?, `surname`=?, `birthdate`=?, `schooling`=?, `commission`=? WHERE `id_data`=?";
-    let valores = [nombre, apellido, nacimiento, estudios, comision, requestId];
-
-    conexion.query(updateData, valores, function (error) {
+    let picName = "SELECT `photo` FROM `user_data` WHERE `id_data` = ?";
+    conexion.query(picName, [requestId], function (error, rows) {
         if (error) {
             throw error;
         } else {
-            let updatePassword = "UPDATE `user` SET `pass`=? WHERE `id_data`=?";
-            conexion.query(updatePassword, [password, requestId], function (error) {
+            let photo = rows[0].photo;
+
+            let updateData = "UPDATE `user_data` SET `name`=?, `surname`=?, `birthdate`=?, `schooling`=?, `commission`=? WHERE `id_data`=?";
+            let valores = [nombre, apellido, nacimiento, estudios, comision, requestId];
+
+            conexion.query(updateData, valores, function (error) {
                 if (error) {
                     throw error;
                 } else {
-                    res.redirect(`/perfil?email=${email}`);
+                    let updateValues = [];
+
+                    if (req.file) {
+                        // Si se subió una nueva imagen
+                        updateValues.push(req.file.filename);
+                    } else {
+                        // Si no se subió ninguna imagen, usar la imagen predeterminada
+                        updateValues.push(photo);
+                    }
+
+                    updateValues.push(requestId);
+
+                    let updatePhoto = "UPDATE `user_data` SET `photo`=? WHERE `id_data`=?";
+                    conexion.query(updatePhoto, updateValues, function (error) {
+                        if (error) {
+                            throw error;
+                        }
+                        console.log('Foto de perfil actualizada en la base de datos');
+                    });
+
+                    let updatePassword = "UPDATE `user` SET `pass`=? WHERE `id_data`=?";
+                    conexion.query(updatePassword, [password, requestId], function (error) {
+                        if (error) {
+                            throw error;
+                        } else {
+                            res.redirect(`/perfil?email=${email}`);
+                        }
+                    });
                 }
             });
         }
     });
+
 });
 
 // configuración del puerto para el servidor

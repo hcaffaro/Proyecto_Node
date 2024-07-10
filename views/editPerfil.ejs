@@ -72,10 +72,14 @@
         <section class="secciones" id="seccionPerfil">
             <div class="seccion1-cuerpo">
                 <h2 class="seccion1-h2">Editar Perfil de Usuario</h2>
-                <form action="/updatePerfil/<%= userData.id_data %>" method="post">
+                <form action="/updatePerfil/<%= userData.id_data %>" method="post" enctype="multipart/form-data">
                     <div class="perfil-info">
                         <div class="perfil-foto">
                             <img src="/img/<%= userData.photo %>" alt="Foto de perfil">
+                            <div class="form-input">
+                                <label for="fotoPerfil" class="input-label"><strong>Foto de Perfil:</strong></label>
+                                <input type="file" id="fotoPerfil" name="fotoPerfil" accept=".png, .jpg, .jpeg">
+                            </div>
                         </div>
                         <div class="perfil-datos">
                             <div class="form-input">
