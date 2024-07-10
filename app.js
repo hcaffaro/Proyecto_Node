@@ -92,7 +92,7 @@ app.get('/perfil', function (req, res) {
                         if (error) throw error;
                         result[0].birthdate = moment(result[0].birthdate).format('DD/MM/YYYY');
 
-                        res.render('perfil', { user: result[0] });
+                        res.render('perfil', { user: result[0], email : email });
                     });
                 } else {
                     res.redirect(`/registro?email=${email}`);
@@ -336,6 +336,50 @@ app.get('/alumnos', (req, res) => {
     });
 });
 
+// render editar perfil
+app.get('/editPerfil/:id', function (req, res) {
+    const requestId = req.params.id;
+
+    let search = "SELECT * FROM `user` WHERE `id_data`=?";
+    conexion.query(search, [requestId], function (error, rows) {
+        if (error) {
+            throw error;
+        } else {
+            let query = "SELECT * FROM `user_data` WHERE id_data = ?";
+            conexion.query(query, [requestId], function (error, result) {
+                if (error) throw error;
+                result[0].birthdate = moment(result[0].birthdate).format('YYYY-MM-DD');
+
+                res.render('editPerfil', { userData: result[0], user: rows[0] });
+            });
+        }
+    });
+});
+
+// handle profile update
+app.post('/updatePerfil/:id', function (req, res) {
+    const requestId = req.params.id;
+    const { nombre, apellido, nacimiento, estudios, comision, password } = req.body;
+    const email = req.body.email;
+
+    let updateData = "UPDATE `user_data` SET `name`=?, `surname`=?, `birthdate`=?, `schooling`=?, `commission`=? WHERE `id_data`=?";
+    let valores = [nombre, apellido, nacimiento, estudios, comision, requestId];
+
+    conexion.query(updateData, valores, function (error) {
+        if (error) {
+            throw error;
+        } else {
+            let updatePassword = "UPDATE `user` SET `pass`=? WHERE `id_data`=?";
+            conexion.query(updatePassword, [password, requestId], function (error) {
+                if (error) {
+                    throw error;
+                } else {
+                    res.redirect(`/perfil?email=${email}`);
+                }
+            });
+        }
+    });
+});
 
 // configuración del puerto para el servidor
 app.listen(3000, function () {

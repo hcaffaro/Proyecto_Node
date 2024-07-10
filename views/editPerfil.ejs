@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/headerStyle.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="img/logo-grupo.png">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/headerStyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="icon" href="/img/logo-grupo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
-    <title>Perfil</title>
+    <title>Editar perfil</title>
     <style>
+
         .secciones {
             background-color: #a9bedf;
             border: 1px solid #ccc;
@@ -22,13 +24,14 @@
             max-width: 80%;
             border-radius: 10px;
         }
+
         .perfil-info {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .perfil-foto{
+        .perfil-foto {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -41,58 +44,96 @@
             object-fit: cover;
             margin: 20px;
         }
+
         .perfil-datos {
             font-size: 20px;
         }
+
         .perfil-datos p {
             margin-bottom: 10px;
         }
 
-        #seccionPerfil{
+        #seccionPerfil {
             display: flex;
             flex-direction: column;
             margin-top: 150px;
         }
 
-        .btn-edit{
+        .btn-edit {
             display: flex;
             justify-content: right;
         }
-
     </style>
 </head>
+
 <body>
-    <header>
-    </header>
+    <header></header>
     <main>
         <section class="secciones" id="seccionPerfil">
             <div class="seccion1-cuerpo">
-                <h2 class="seccion1-h2">Perfil de Usuario</h2>
-                <div class="perfil-info">
-                    <div class="perfil-foto">
-                        <img src="/img/<%= user.photo %>" alt="Foto de perfil">
+                <h2 class="seccion1-h2">Editar Perfil de Usuario</h2>
+                <form action="/updatePerfil/<%= userData.id_data %>" method="post">
+                    <div class="perfil-info">
+                        <div class="perfil-foto">
+                            <img src="/img/<%= userData.photo %>" alt="Foto de perfil">
+                        </div>
+                        <div class="perfil-datos">
+                            <div class="form-input">
+                                <label for="email" class="input-label"><strong>Email:</strong></label>
+                                <input type="email" id="email" name="email" class="email-in" size="40" value="<%= user.email %>" readonly>
+                            </div>
+                            <div class="form-input">
+                                <label for="nombre" class="input-label"><strong>Nombre:</strong></label>
+                                <input type="text" id="nombre" name="nombre" class="email-in" size="40" value="<%= userData.name %>" required>
+                            </div>
+                            <div class="form-input">
+                                <label for="apellido" class="input-label"><strong>Apellido:</strong></label>
+                                <input type="text" id="apellido" name="apellido" class="email-in" size="40" value="<%= userData.surname %>" required>
+                            </div>
+                            <div class="form-input">
+                                <label for="nacimiento" class="input-label"><strong>Fecha de Nacimiento:</strong></label>
+                                <input type="date" id="nacimiento" name="nacimiento" class="email-in" value="<%= userData.birthdate %>" required>
+                            </div>
+                            <div class="form-input">
+                                <label for="estudios" class="input-label"><strong>Nivel de Estudios:</strong></label>
+                                <select id="estudios" name="estudios" required>
+                                    <option value="" selected disabled>Nivel de estudios alcanzados</option>
+                                    <option value="Primario" <%= userData.schooling === 'Primario' ? 'selected' : '' %>>Primario</option>
+                                    <option value="Secundario" <%= userData.schooling === 'Secundario' ? 'selected' : '' %>>Secundario</option>
+                                    <option value="Terciario" <%= userData.schooling === 'Terciario' ? 'selected' : '' %>>Terciario</option>
+                                    <option value="Universitario" <%= userData.schooling === 'Universitario' ? 'selected' : '' %>>Universitario</option>
+                                </select>
+                            </div>
+                            <div class="form-input">
+                                <label class="input-label"><strong>Comisión:</strong></label>
+                                <div style="margin-left: 50px;">
+                                    <input type="radio" id="comision1" name="comision" value="1" <%= userData.commission === 1 ? 'checked' : '' %>>
+                                    <label for="comision1">Comisión 1</label><br>
+                                    <input type="radio" id="comision2" name="comision" value="2" <%= userData.commission === 2 ? 'checked' : '' %>>
+                                    <label for="comision2">Comisión 2</label><br>
+                                    <input type="radio" id="comision3" name="comision" value="3" <%= userData.commission === 3 ? 'checked' : '' %>>
+                                    <label for="comision3">Comisión 3</label><br>
+                                </div>
+                            </div>
+                            <div class="form-input">
+                                <label for="password" class="input-label"><strong>Contraseña:</strong></label>
+                                <input type="password" id="password" name="password" class="email-in" size="40" required>
+                            </div>
+                        </div>
                     </div>
-                    <div class="perfil-datos">
-                        <p><strong>Nombre:</strong> <%= user.name %></p>
-                        <p><strong>Apellido:</strong> <%= user.surname %></p>
-                        <p><strong>Fecha de Nacimiento:</strong> <%= user.birthdate %></p>
-                        <p><strong>Nivel de Estudios:</strong> <%= user.schooling %></p>
-                        <p><strong>Comisión:</strong> <%= user.commission %></p>
+                    <div class="btn-edit">
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </div>
-                </div>
-            </div>
-            <div class="btn-edit">
-                <br>
-                <form action="/updateData" method="post" >
-                    <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
             </div>
         </section>
     </main>
-    <footer>
-    </footer>
-    
-    <script src="js/headerFooter.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <footer></footer>
+
+    <script src="/js/headerFooter.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
