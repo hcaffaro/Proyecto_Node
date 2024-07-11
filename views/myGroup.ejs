@@ -21,14 +21,11 @@
     <main>
         <section class="secciones-gruposConformados" id="seccion-grupos-conformados">
             <div>
-                <br>
                 <h2 class="seccion1-h2">Mi Grupo</h2>
-                <br><br>
             </div>
-            <div class="row row-cols-1 row-cols-md-2 g-4">
-                <div class="col">
-                    <div class="card" style="max-width: 450px;">
-                        <div style="max-height: 120px;">
+                <div class="miGrupo">
+                    <div class="card">
+                        <div>
                             <div class="row row-cols-sm-2 row-cols-md-4" style="margin: 5px;">
                                 <% if (group.student1_photo) { %>
                                     <img class="imgGrupo" src="img/<%= group.student1_photo %>" alt="Alumno 1">
@@ -66,9 +63,8 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                             </form>
-                            <div class="collapse" id="collapseGroup<%= group.id_group %>">
                                 <div class="card card-body">
-                                    <ul>
+                                    <ol class="integrantes">
                                         <% if (group.student1_name) { %>
                                             <li>
                                                 <%= group.student1_name %> <%= group.student1_surname %>
@@ -89,20 +85,11 @@
                                                 <%= group.student4_name %> <%= group.student4_surname %>
                                             </li>
                                         <% } %>
-                                    </ul>
+                                    </ol>
                                 </div>
-                            </div>
-                            <p class="d-inline-flex gap-1">
-                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseGroup<%= group.id_group %>" aria-expanded="false"
-                                    aria-controls="collapseGroup<%= group.id_group %>">
-                                    Ver lista de alumnos
-                                </button>
-                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
     </main>
     <footer></footer>

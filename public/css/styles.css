@@ -35,25 +35,15 @@ main {
     margin-top: 10px;
     margin-bottom: 10px;
     border: 2px solid #1C1A38;
-    border-radius: 20px 20px 20px 20px;
+    border-radius: 20px;
     order: 1;
-}
-
-.secciones-gruposConformados {
-    display: flex;
-    flex-direction: row;
-    width: 80%;
-    padding: 50px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 2px solid #1C1A38;
 }
 
 #seccion1 {
     color: #1C1A38;
     padding: 20px;
     display: flex;
-    border-radius: 20px 0 0 20px;
+    border-radius: 20px;
     order: 1;
 }
 
@@ -104,7 +94,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 0 20px 20px 0;
+    border-radius: 20px;
     background-color: #1C1A38;
     color: white;
     padding: 50px;
@@ -116,7 +106,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 20px 20px 20px 20px;
+    border-radius: 20px;
     background-color: #1C1A38;
     color: white;
     padding: 50px;
@@ -327,7 +317,7 @@ main {
     #seccion5 {
         flex-grow: initial;
         max-width: none;
-        width: 100%;
+        width: 90%;
         align-items: center;
         justify-content: center;
         text-align: center;
@@ -383,7 +373,7 @@ main {
     #seccion5 {
         flex-grow: initial;
         max-width: none;
-        width: 100%;
+        width: 90%;
         align-items: center;
         justify-content: center;
         text-align: center;

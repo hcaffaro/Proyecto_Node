@@ -1,12 +1,16 @@
 
   .secciones-gruposConformados {
-    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
     padding: 10px;
     margin:  auto;
     margin-bottom: 50px;
     margin-top: 150px;
-  
-    border: 2px solid #1C1A38;
+    border-radius: 20px;
+    background-color: #c2a9df;
+    border: 1px solid #ccc;
 }
 
 .imgGrupo{
@@ -22,6 +26,26 @@
   object-fit: scale-down;
   
 }
+
+.integrantes{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0;
+    list-style: none;
+}
+.integrantes li {
+  margin-bottom: 10px;
+}
+
+.miGrupo{
+  width: 80%;
+  padding: 5px;
+  margin: 20px;
+  border-radius: 20px;
+ 
+}
+
 
 @media only screen and (max-width: 768px) {
   .secciones-gruposConformados { margin-top: 200px;}
