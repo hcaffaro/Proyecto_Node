@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     const header = document.querySelector("header");
     const footer = document.querySelector("footer");
 
@@ -22,9 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" id="navPerfil" href='/perfil?email=${email}' >Mi perfil</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" id="navAlumnos" href='/alumnos'>Grupos conformados</a>
-                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="navDropdown">
+                        Grupos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href='/myGroup?email=${email}' id="navGrupo" >Mi grupo</a></li>
+                            <li><a class="dropdown-item" id="navAlumnos" href='/alumnos'>Grupos conformados</a>
+                    </ul>
+                 </li>
                     <li class="nav-item">
                         <a class="nav-link active" id="navProfesores" href='/profesores?email=${email}'>Armado de grupos</a>
                     </li>
@@ -63,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         logoutBtn.addEventListener('click', () => {
             localStorage.removeItem('email');
             localStorage.removeItem('rol');
-            window.location.href = '/index.html'; 
+            window.location.href = '/index.html';
         });
     }
 
@@ -71,25 +77,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const alumnos = document.getElementById("navAlumnos");
     const profesores = document.getElementById("navProfesores");
     const admin = document.getElementById("navAdmin");
+    const miGrupo = document.getElementById("navGrupo");
+    const drop = document.getElementById("navDropdown");
 
     if (email) {
-        perfil.hidden = false; 
+        drop.hidden=false;
+        perfil.hidden = false;
         alumnos.hidden = false;
         if (rol === 'Student') {
             admin.hidden = true;
             profesores.hidden = true;
+            miGrupo.hidden= false;
         } else if (rol === 'Teacher') {
             admin.hidden = true;
             profesores.hidden = false;
+            miGrupo.hidden = true;
         } else {
             admin.hidden = false;
             alumnos.hidden = true;
-            profesores.hidden = true;       
+            profesores.hidden = true;
+            miGrupo.hidden = true;
         }
     } else {
         perfil.hidden = true;
         admin.hidden = true;
-        alumnos.hidden = true;
-        profesores.hidden = true;
+        profesores.hidden = true;     
+        drop.hidden = true;
     }
 });

@@ -34,6 +34,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
 // registro User
 app.post("/registrar", function (req, res) {
     const { registroEmail, registroDni } = req.body;
@@ -424,6 +425,76 @@ app.post('/updatePerfil/:id', upload.single('fotoPerfil'), function (req, res) {
     });
 
 });
+
+// render mi grupo
+app.get('/myGroup', (req, res) => {
+    const email = req.query.email;
+
+    const queryIdData = 'SELECT `id_data` FROM `user` WHERE email = ?';
+    conexion.query(queryIdData, [email], (err, result) => {
+        if (err) {
+            throw err;
+        }
+
+        const idData = result[0]?.id_data;
+        if (!idData) {
+            return res.redirect(`/registro?email=${email}`);
+        }
+        const queryOnGroup = 'SELECT `onGroup` FROM `user_data` WHERE `id_data` = ?';
+        conexion.query(queryOnGroup, [idData], (err, result) => {
+            if (err) {
+                throw err;
+            }
+
+            const onGroup = result[0]?.onGroup;
+            if (!onGroup) {
+                res.send(`<script>alert('No se encuentra en un grupo'); window.location.href='/index.html';</script>`);
+                return;
+            }
+
+            const queryGroup = `
+                SELECT sg.*, 
+                       ud1.name as student1_name, ud1.surname as student1_surname, ud1.photo as student1_photo,
+                       ud2.name as student2_name, ud2.surname as student2_surname, ud2.photo as student2_photo,
+                       ud3.name as student3_name, ud3.surname as student3_surname, ud3.photo as student3_photo,
+                       ud4.name as student4_name, ud4.surname as student4_surname, ud4.photo as student4_photo
+                FROM student_groups sg
+                LEFT JOIN user_data ud1 ON sg.id_student1 = ud1.id_data
+                LEFT JOIN user_data ud2 ON sg.id_student2 = ud2.id_data
+                LEFT JOIN user_data ud3 ON sg.id_student3 = ud3.id_data
+                LEFT JOIN user_data ud4 ON sg.id_student4 = ud4.id_data
+                WHERE sg.id_student1 = ? OR sg.id_student2 = ? OR sg.id_student3 = ? OR sg.id_student4 = ?;
+            `;
+            conexion.query(queryGroup, [idData, idData, idData, idData], (err, results) => {
+                if (err) {
+                    throw err;
+                }
+
+                if (results.length === 0) {
+                    res.send(`<script>alert('No se encontró un grupo asociado'); window.location.href='/index.html';</script>`);
+                    return;
+                }
+
+                res.render('myGroup', { group: results[0], email: email });
+            });
+        });
+    });
+});
+
+// actualizar datos del grupo
+app.post('/updateGroup', (req, res) => {
+    const { id_group, name_group, repos, info, email } = req.body;
+
+    const queryUpdate = `UPDATE student_groups SET name_group = ?, repos = ?, info = ? WHERE id_group = ?`;
+    conexion.query(queryUpdate, [name_group, repos, info, id_group], (err, result) => {
+        if (err) {
+            throw err;
+        }
+
+        res.redirect(`/myGroup?email=${email}`);
+    });
+});
+
 
 // configuración del puerto para el servidor
 app.listen(3000, function () {
