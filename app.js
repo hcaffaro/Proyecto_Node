@@ -371,60 +371,72 @@ app.get('/editPerfil/:id', function (req, res) {
     });
 });
 
-// Ruta para actualizar datos del perfil y cambiar imagen de perfil
+// actualizar datos e img del perfil
 app.post('/updatePerfil/:id', upload.single('fotoPerfil'), function (req, res) {
     const requestId = req.params.id;
-    const { nombre, apellido, nacimiento, estudios, comision, password } = req.body;
+    const { nombre, apellido, nacimiento, estudios, comision, currentPassword, newPassword } = req.body;
     const email = req.body.email;
 
-    let picName = "SELECT `photo` FROM `user_data` WHERE `id_data` = ?";
-    conexion.query(picName, [requestId], function (error, rows) {
+    let checkPassword = "SELECT `pass` FROM `user` WHERE `id_data` = ?";
+    conexion.query(checkPassword, [requestId], function (error, result) {
         if (error) {
             throw error;
         } else {
-            let photo = rows[0].photo;
+            if (result.length > 0 && result[0].pass === currentPassword) {
 
-            let updateData = "UPDATE `user_data` SET `name`=?, `surname`=?, `birthdate`=?, `schooling`=?, `commission`=? WHERE `id_data`=?";
-            let valores = [nombre, apellido, nacimiento, estudios, comision, requestId];
-
-            conexion.query(updateData, valores, function (error) {
-                if (error) {
-                    throw error;
-                } else {
-                    let updateValues = [];
-
-                    if (req.file) {
-                        // Si se subió una nueva imagen
-                        updateValues.push(req.file.filename);
+                let picName = "SELECT `photo` FROM `user_data` WHERE `id_data` = ?";
+                conexion.query(picName, [requestId], function (error, rows) {
+                    if (error) {
+                        throw error;
                     } else {
-                        // Si no se subió ninguna imagen, usar la imagen predeterminada
-                        updateValues.push(photo);
+                        let photo = rows[0].photo;
+
+                        let updateData = "UPDATE `user_data` SET `name` = ?, `surname` = ?, `birthdate` = ?, `schooling` = ?, `commission` = ? WHERE `id_data` = ?";
+                        let valores = [nombre, apellido, nacimiento, estudios, comision, requestId];
+
+                        conexion.query(updateData, valores, function (error) {
+                            if (error) {
+                                throw error;
+                            } else {
+                                let updateValues = [];
+
+                                if (req.file) {
+                                    updateValues.push(req.file.filename);
+                                } else {
+                                    updateValues.push(photo);
+                                }
+
+                                updateValues.push(requestId);
+
+                                let updatePhoto = "UPDATE `user_data` SET `photo` = ? WHERE `id_data` = ?";
+                                conexion.query(updatePhoto, updateValues, function (error) {
+                                    if (error) {
+                                        throw error;
+                                    }
+                                });
+
+                                if (newPassword) {
+                                    let updatePassword = "UPDATE `user` SET `pass` = ? WHERE `id_data` = ?";
+                                    conexion.query(updatePassword, [newPassword, requestId], function (error) {
+                                        if (error) {
+                                            throw error;
+                                        }
+                                        res.send("<script>alert('Contraseña actualizada correctamente'); window.location.href = '/perfil?email=" + email + "';</script>");
+                                    });
+                                } else {
+                                    res.redirect(`/perfil?email=${email}`);
+                                }
+                            }
+                        });
                     }
-
-                    updateValues.push(requestId);
-
-                    let updatePhoto = "UPDATE `user_data` SET `photo`=? WHERE `id_data`=?";
-                    conexion.query(updatePhoto, updateValues, function (error) {
-                        if (error) {
-                            throw error;
-                        }
-                        console.log('Foto de perfil actualizada en la base de datos');
-                    });
-
-                    let updatePassword = "UPDATE `user` SET `pass`=? WHERE `id_data`=?";
-                    conexion.query(updatePassword, [password, requestId], function (error) {
-                        if (error) {
-                            throw error;
-                        } else {
-                            res.redirect(`/perfil?email=${email}`);
-                        }
-                    });
-                }
-            });
+                });
+            } else {
+                res.send("<script>alert('La contraseña actual no coincide'); window.location.href = '/editPerfil/" + requestId + "';</script>");
+            }
         }
     });
-
 });
+
 
 // render mi grupo
 app.get('/myGroup', (req, res) => {
@@ -494,7 +506,6 @@ app.post('/updateGroup', (req, res) => {
         res.redirect(`/myGroup?email=${email}`);
     });
 });
-
 
 // configuración del puerto para el servidor
 app.listen(3000, function () {
