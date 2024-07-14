@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/headerStyle.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="img/logo-grupo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,45 +24,56 @@
             max-width: 80%;
             border-radius: 10px;
         }
+
         .perfil-info {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .perfil-foto{
+        .perfil-foto {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         .perfil-foto img {
+            aspect-ratio: 1 / 1;
+            object-fit:initial;
             width: 30%;
             height: 30%;
             border-radius: 50%;
-            object-fit: cover;
             margin: 20px;
+            object-fit: cover;
         }
+
         .perfil-datos {
             font-size: 20px;
         }
+
         .perfil-datos p {
             margin-bottom: 10px;
         }
 
-        #seccionPerfil{
+        #seccionPerfil {
             display: flex;
             flex-direction: column;
             margin-top: 150px;
         }
 
-        .btn-edit{
+        .btn-footer {
             display: flex;
-            justify-content: right;
+            flex-direction: row;
+            justify-content: space-between;
         }
 
+        .modal-body {
+            background-color: #1C1A38;
+            color: white;
+        }
     </style>
 </head>
+
 <body>
     <header>
     </header>
@@ -73,26 +86,84 @@
                         <img src="/img/<%= user.photo %>" alt="Foto de perfil">
                     </div>
                     <div class="perfil-datos">
-                        <p><strong>Nombre:</strong> <%= user.name %></p>
-                        <p><strong>Apellido:</strong> <%= user.surname %></p>
-                        <p><strong>Fecha de Nacimiento:</strong> <%= user.birthdate %></p>
-                        <p><strong>Nivel de Estudios:</strong> <%= user.schooling %></p>
-                        <p><strong>Comisión:</strong> <%= user.commission %></p>
+                        <p><strong>Nombre:</strong>
+                            <%= user.name %>
+                        </p>
+                        <p><strong>Apellido:</strong>
+                            <%= user.surname %>
+                        </p>
+                        <p><strong>Fecha de Nacimiento:</strong>
+                            <%= user.birthdate %>
+                        </p>
+                        <p><strong>Nivel de Estudios:</strong>
+                            <%= user.schooling %>
+                        </p>
+                        <p><strong>Comisión:</strong>
+                            <%= user.commission %>
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="btn-edit">
-                <br>
-                <form action="/editPerfil/<%= user.id_data%>" method="get" >
-                    <button type="submit" class="btn btn-primary">Editar perfil</button>
-                </form>
+            <br>
+            <div class="btn-footer">
+                <div>
+                    <form action="/editPerfil/<%= user.id_data %>" method="get">
+                        <button type="submit" class="btn btn-primary">Editar perfil</button>
+                    </form>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#modalUnsubscribe">
+                        Eliminar perfil
+                    </button>
+                    <div class="modal fade" id="modalUnsubscribe" tabindex="-1" aria-labelledby="modalUnsubscribe"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Formulario dentro del modal -->
+                                <form action="/unsubscribe" method="post">
+                                    <input type="hidden" name="id_data" value="<%= user.id_data %>">
+                                    <div class="modal-body">
+                                        <div>
+                                            <p>Ingrese su email y contraseña para solicitar la baja del perfil</p>
+                                        </div>
+                                        <div class="form-input">
+                                            <label for="email" class="input-label">Email</label>
+                                            <input type="email" id="email" name="email" class="email-in"
+                                                placeholder="Ingresa tu Email" required>
+                                        </div>
+                                        <div class="form-input">
+                                            <label for="password" class="input-label">Contraseña</label>
+                                            <input type="password" id="password" name="password" class="password-in"
+                                                placeholder="Ingresa tu Contraseña" required>
+                                        </div>
+                                        <hr>
+                                        <div>
+                                            <p>Una vez aceptada la solicitud se perderán todos los datos y deberá volver
+                                                a registrarse para utilizar la plataforma.</p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-primary">Solicitar baja</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
     <footer>
     </footer>
-    
+
     <script src="js/headerFooter.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

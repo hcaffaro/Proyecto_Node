@@ -217,7 +217,7 @@ app.get('/approveUnsubscribe/:id', function (req, res) {
         query = 'DELETE FROM unsubscribe_request WHERE id_request = ?';
         conexion.query(query, [requestId], function (err) {
             if (err) throw err;
-
+            
             query = 'DELETE FROM user WHERE id_user = ?';
             conexion.query(query, [request.id_user], function (err) {
                 if (err) throw err;
@@ -437,6 +437,36 @@ app.post('/updatePerfil/:id', upload.single('fotoPerfil'), function (req, res) {
     });
 });
 
+// enviar la solicitud de baja
+app.post('/unsubscribe', function (req, res) {
+    const { id_data, email, password } = req.body;
+
+    let search = "SELECT `id_user`, `email`, `pass`, `id_data` FROM `user` WHERE `id_data` = ?";
+    conexion.query(search, [id_data], function (error, rows) {
+        if (error) {
+            throw error;
+        } else {
+            if (rows.length > 0) {
+                const user = rows[0];
+
+                if (user.pass === password && user.email === email) {
+                    let insertQuery = "INSERT INTO `unsubscribe_request`(`id_user`, `id_data`, `email`) VALUES (?, ?, ?)";
+                    conexion.query(insertQuery, [user.id_user, user.id_data, user.email], function (error, result) {
+                        if (error) {
+                            throw error;
+                        } else {
+                            res.redirect(`/perfil?email=${email}`)
+                        }
+                    });
+                } else {
+                    res.send("<script>alert('Datos incorrectos'); window.location.href = '/perfil?email=" + email + "';</script>");
+                }
+            } else {
+                res.send("<script>alert('Usuario no encontrado'); window.location.href = '/perfil?email=" + email + "';</script>");
+            }
+        }
+    });
+});
 
 // render mi grupo
 app.get('/myGroup', (req, res) => {
