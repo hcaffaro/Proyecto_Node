@@ -25,7 +25,7 @@ app.use(express.json());
 //configurar multer 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'public/img'); // Directorio donde se guardarán las imágenes
+        cb(null, 'public/img');
     },
     filename: function (req, file, cb) {
         const uniqueFileName = `${req.params.id}_${file.originalname}`;
@@ -351,7 +351,7 @@ app.get('/alumnos', (req, res) => {
     });
 });
 
-// render editar perfil
+//render editar perfil
 app.get('/editPerfil/:id', function (req, res) {
     const requestId = req.params.id;
 
