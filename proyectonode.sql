@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-07-2024 a las 07:42:36
+-- Tiempo de generación: 15-07-2024 a las 17:07:06
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -38,8 +38,8 @@ CREATE TABLE `access_requests` (
 --
 
 INSERT INTO `access_requests` (`id`, `email`, `dni`) VALUES
-(1, 'alumno50@gmail.com', 12345678),
-(3, 'alumno40@gmail.com', 87654321);
+(3, 'alumno40@gmail.com', 87654321),
+(5, 'prueba1@hotmail.com', 12345678);
 
 -- --------------------------------------------------------
 
@@ -66,7 +66,9 @@ CREATE TABLE `student_groups` (
 INSERT INTO `student_groups` (`id_group`, `commission`, `info`, `repos`, `id_student1`, `id_student2`, `id_student3`, `id_student4`, `name_group`) VALUES
 (5, '2', NULL, NULL, 22, 23, 24, 25, 'Grupo'),
 (8, '2', NULL, NULL, 15, 16, NULL, NULL, 'Grupo'),
-(9, '2', NULL, NULL, 14, 17, 18, NULL, 'Grupo');
+(9, '2', NULL, NULL, 14, 17, 18, NULL, 'Grupo'),
+(10, '2', 'ASDSAVC', 'https://github.com/CarlosMartin/proyectoNodeCaC', 2, 19, 20, 21, 'Grupo Dinamita'),
+(11, '2', 'bla bla bla descripcion bla bla bla', 'git/prueba', 49, 50, NULL, NULL, 'Grupo prueba');
 
 -- --------------------------------------------------------
 
@@ -105,8 +107,7 @@ INSERT INTO `user` (`id_user`, `email`, `pass`, `rol`, `id_data`) VALUES
 (4, 'nabelY@gmail.com', '12345678', 'Teacher', NULL),
 (5, 'sajamaP@gmail.com', '12345678', 'Teacher', NULL),
 (6, 'perezA@gmail.com', '12345678', 'Teacher', 46),
-(7, 'alumno1@gmail.com', '12345678', 'Student', 2),
-(8, 'alumno2@gmail.com', '12345678', 'Student', 3),
+(7, 'alumno1@gmail.com', '12345', 'Student', 2),
 (9, 'alumno3@gmail.com', '12345678', 'Student', 4),
 (10, 'alumno4@gmail.com', '12345678', 'Student', 5),
 (11, 'alumno5@gmail.com', '12345678', 'Student', 6),
@@ -142,7 +143,9 @@ INSERT INTO `user` (`id_user`, `email`, `pass`, `rol`, `id_data`) VALUES
 (43, 'alumno35@gmail.com', '12345678', 'Student', 36),
 (45, 'alumno37@gmail.com', '12345678', 'Student', NULL),
 (46, 'profesor1@gmail.com', 'cac2024', 'Teacher', 47),
-(47, 'alumno100@gmail.com', '12345678', 'Student', 48);
+(47, 'alumno100@gmail.com', '12345678', 'Student', 48),
+(48, 'alumno50@gmail.com', '12345678', 'Student', 49),
+(49, 'prueba2@gmail.com', '12345678', 'Student', 50);
 
 -- --------------------------------------------------------
 
@@ -167,7 +170,7 @@ CREATE TABLE `user_data` (
 
 INSERT INTO `user_data` (`id_data`, `name`, `surname`, `birthdate`, `schooling`, `commission`, `photo`, `onGroup`) VALUES
 (1, 'Administracion', 'Codo a Codo', '2000-01-01', 'Curso Virtual', '4DM1N', 'profilePic.png', 0),
-(2, 'Carlos', 'García', '1990-01-01', 'Primario', '1', 'profilePic.png', 0),
+(2, 'Carlos Martin', 'Garcia', '1984-08-07', 'Universitario', '2', '2_tequieromucho.jpg', 1),
 (3, 'María', 'Martínez', '1991-02-02', 'Secundario', '1', 'profilePic.png', 0),
 (4, 'Juan', 'López', '1992-03-03', 'Universitario', '1', 'profilePic.png', 0),
 (5, 'Ana', 'Hernández', '1993-04-04', 'Terciario', '1', 'profilePic.png', 0),
@@ -184,9 +187,9 @@ INSERT INTO `user_data` (`id_data`, `name`, `surname`, `birthdate`, `schooling`,
 (16, 'Diego', 'Ruiz', '1992-03-03', 'Universitario', '2', 'profilePic.png', 1),
 (17, 'Valeria', 'Morales', '1993-04-04', 'Terciario', '2', 'profilePic.png', 1),
 (18, 'Jorge', 'Ortiz', '1994-05-05', 'Primario', '2', 'profilePic.png', 1),
-(19, 'Elena', 'Castro', '1995-06-06', 'Secundario', '2', 'profilePic.png', 0),
-(20, 'Pablo', 'Vargas', '1996-07-07', 'Universitario', '2', 'profilePic.png', 0),
-(21, 'Marta', 'Ramos', '1997-08-08', 'Terciario', '2', 'profilePic.png', 0),
+(19, 'Elena', 'Castro', '1995-06-06', 'Secundario', '2', 'profilePic.png', 1),
+(20, 'Pablo', 'Vargas', '1996-07-07', 'Universitario', '2', 'profilePic.png', 1),
+(21, 'Marta', 'Ramos', '1997-08-08', 'Terciario', '2', 'profilePic.png', 1),
 (22, 'Luis', 'Gutiérrez', '1998-09-09', 'Primario', '2', 'profilePic.png', 1),
 (23, 'Adriana', 'Chávez', '1999-10-10', 'Secundario', '2', 'profilePic.png', 1),
 (24, 'Héctor', 'Molina', '2000-11-11', 'Universitario', '2', 'profilePic.png', 1),
@@ -204,7 +207,9 @@ INSERT INTO `user_data` (`id_data`, `name`, `surname`, `birthdate`, `schooling`,
 (36, 'Gabriel', 'Campos', '2000-11-11', 'Universitario', '3', 'profilePic.png', 0),
 (46, 'Alan Gabriel', 'Perez', '1994-12-19', 'Universitario', '3', 'profilePic.png', 1),
 (47, 'Gabriel', 'Peralta', NULL, NULL, '2', 'profilePic.png', 1),
-(48, 'ejemplo', 'ejemplo', '2024-07-29', 'Primario', '3', 'profilePic.png', 0);
+(48, 'ejemplo', 'ejemplo', '2024-07-29', 'Primario', '3', 'profilePic.png', 0),
+(49, 'Robin', 'Nico', '1994-02-06', 'Universitario', '2', '49_nicoRobin.jpg', 1),
+(50, 'Prueba', 'Dos', '2024-07-01', 'Primario', '2', '50_DaveMustaine.jpg', 1);
 
 --
 -- Índices para tablas volcadas
@@ -227,7 +232,6 @@ ALTER TABLE `student_groups`
 --
 ALTER TABLE `unsubscribe_request`
   ADD PRIMARY KEY (`id_request`),
-  ADD KEY `id_data` (`id_data`),
   ADD KEY `id_user` (`id_user`);
 
 --
@@ -253,31 +257,31 @@ ALTER TABLE `user_data`
 -- AUTO_INCREMENT de la tabla `access_requests`
 --
 ALTER TABLE `access_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `student_groups`
 --
 ALTER TABLE `student_groups`
-  MODIFY `id_group` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_group` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `unsubscribe_request`
 --
 ALTER TABLE `unsubscribe_request`
-  MODIFY `id_request` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_request` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `user_data`
 --
 ALTER TABLE `user_data`
-  MODIFY `id_data` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_data` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- Restricciones para tablas volcadas
@@ -296,8 +300,7 @@ ALTER TABLE `student_groups`
 -- Filtros para la tabla `unsubscribe_request`
 --
 ALTER TABLE `unsubscribe_request`
-  ADD CONSTRAINT `unsubscribe_request_ibfk_1` FOREIGN KEY (`id_data`) REFERENCES `user_data` (`id_data`),
-  ADD CONSTRAINT `unsubscribe_request_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `unsubscribe_request_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 --
 -- Filtros para la tabla `user`

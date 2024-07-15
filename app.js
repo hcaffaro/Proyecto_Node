@@ -462,7 +462,7 @@ app.post('/unsubscribe', function (req, res) {
                     res.send("<script>alert('Datos incorrectos'); window.location.href = '/perfil?email=" + email + "';</script>");
                 }
             } else {
-                res.send("<script>alert('Usuario no encontrado'); window.location.href = '/perfil?email=" + email + "';</script>");
+                res.send("<script>alert('Error al procesar la solicitud.'); window.location.href = '/perfil?email=" + email + "';</script>");
             }
         }
     });
