@@ -212,17 +212,21 @@ app.get('/approveUnsubscribe/:id', function (req, res) {
         if (err) throw err;
 
         const request = results[0];
-        
+
         query = `
             UPDATE student_groups 
             SET 
-                id_student1 = CASE WHEN id_student1 = ? THEN NULL ELSE id_student1 END,
-                id_student2 = CASE WHEN id_student2 = ? THEN NULL ELSE id_student2 END,
-                id_student3 = CASE WHEN id_student3 = ? THEN NULL ELSE id_student3 END,
-                id_student4 = CASE WHEN id_student4 = ? THEN NULL ELSE id_student4 END
+                id_student1 = IF(id_student1 = ?, NULL, id_student1),
+                id_student2 = IF(id_student2 = ?, NULL, id_student2),
+                id_student3 = IF(id_student3 = ?, NULL, id_student3),
+                id_student4 = IF(id_student4 = ?, NULL, id_student4)
             WHERE id_student1 = ? OR id_student2 = ? OR id_student3 = ? OR id_student4 = ?
         `;
-        conexion.query(query, [request.id_data, request.id_data, request.id_data, request.id_data, request.id_data, request.id_data], function (err) {
+        const params = [
+            request.id_data, request.id_data, request.id_data, request.id_data,
+            request.id_data, request.id_data, request.id_data, request.id_data
+        ];
+        conexion.query(query, params, function (err) {
             if (err) throw err;
 
             query = 'DELETE FROM unsubscribe_request WHERE id_request = ?';
