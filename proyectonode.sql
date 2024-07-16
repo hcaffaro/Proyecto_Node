@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-07-2024 a las 17:07:06
+-- Tiempo de generación: 16-07-2024 a las 15:23:32
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -64,9 +64,6 @@ CREATE TABLE `student_groups` (
 --
 
 INSERT INTO `student_groups` (`id_group`, `commission`, `info`, `repos`, `id_student1`, `id_student2`, `id_student3`, `id_student4`, `name_group`) VALUES
-(5, '2', NULL, NULL, 22, 23, 24, 25, 'Grupo'),
-(8, '2', NULL, NULL, 15, 16, NULL, NULL, 'Grupo'),
-(9, '2', NULL, NULL, 14, 17, 18, NULL, 'Grupo'),
 (10, '2', 'ASDSAVC', 'https://github.com/CarlosMartin/proyectoNodeCaC', 2, 19, 20, 21, 'Grupo Dinamita'),
 (11, '2', 'bla bla bla descripcion bla bla bla', 'git/prueba', 49, 50, NULL, NULL, 'Grupo prueba');
 
@@ -171,7 +168,6 @@ CREATE TABLE `user_data` (
 INSERT INTO `user_data` (`id_data`, `name`, `surname`, `birthdate`, `schooling`, `commission`, `photo`, `onGroup`) VALUES
 (1, 'Administracion', 'Codo a Codo', '2000-01-01', 'Curso Virtual', '4DM1N', 'profilePic.png', 0),
 (2, 'Carlos Martin', 'Garcia', '1984-08-07', 'Universitario', '2', '2_tequieromucho.jpg', 1),
-(3, 'María', 'Martínez', '1991-02-02', 'Secundario', '1', 'profilePic.png', 0),
 (4, 'Juan', 'López', '1992-03-03', 'Universitario', '1', 'profilePic.png', 0),
 (5, 'Ana', 'Hernández', '1993-04-04', 'Terciario', '1', 'profilePic.png', 0),
 (6, 'Pedro', 'González', '1994-05-05', 'Primario', '1', 'profilePic.png', 0),
@@ -182,18 +178,18 @@ INSERT INTO `user_data` (`id_data`, `name`, `surname`, `birthdate`, `schooling`,
 (11, 'Isabel', 'Flores', '1999-10-10', 'Secundario', '1', 'profilePic.png', 0),
 (12, 'Ricardo', 'Rivera', '2000-11-11', 'Universitario', '1', 'profilePic.png', 0),
 (13, 'Carmen', 'Gómez', '2001-12-12', 'Terciario', '1', 'profilePic.png', 0),
-(14, 'Andrés', 'Fernández', '1990-01-01', 'Primario', '2', 'profilePic.png', 1),
-(15, 'Sofía', 'Jiménez', '1991-02-02', 'Secundario', '2', 'profilePic.png', 1),
-(16, 'Diego', 'Ruiz', '1992-03-03', 'Universitario', '2', 'profilePic.png', 1),
-(17, 'Valeria', 'Morales', '1993-04-04', 'Terciario', '2', 'profilePic.png', 1),
-(18, 'Jorge', 'Ortiz', '1994-05-05', 'Primario', '2', 'profilePic.png', 1),
+(14, 'Andrés', 'Fernández', '1990-01-01', 'Primario', '2', 'profilePic.png', 0),
+(15, 'Sofía', 'Jiménez', '1991-02-02', 'Secundario', '2', 'profilePic.png', 0),
+(16, 'Diego', 'Ruiz', '1992-03-03', 'Universitario', '2', 'profilePic.png', 0),
+(17, 'Valeria', 'Morales', '1993-04-04', 'Terciario', '2', 'profilePic.png', 0),
+(18, 'Jorge', 'Ortiz', '1994-05-05', 'Primario', '2', 'profilePic.png', 0),
 (19, 'Elena', 'Castro', '1995-06-06', 'Secundario', '2', 'profilePic.png', 1),
 (20, 'Pablo', 'Vargas', '1996-07-07', 'Universitario', '2', 'profilePic.png', 1),
 (21, 'Marta', 'Ramos', '1997-08-08', 'Terciario', '2', 'profilePic.png', 1),
-(22, 'Luis', 'Gutiérrez', '1998-09-09', 'Primario', '2', 'profilePic.png', 1),
-(23, 'Adriana', 'Chávez', '1999-10-10', 'Secundario', '2', 'profilePic.png', 1),
-(24, 'Héctor', 'Molina', '2000-11-11', 'Universitario', '2', 'profilePic.png', 1),
-(25, 'Rosa', 'Soto', '2001-12-12', 'Terciario', '2', 'profilePic.png', 1),
+(22, 'Luis', 'Gutiérrez', '1998-09-09', 'Primario', '2', 'profilePic.png', 0),
+(23, 'Adriana', 'Chávez', '1999-10-10', 'Secundario', '2', 'profilePic.png', 0),
+(24, 'Héctor', 'Molina', '2000-11-11', 'Universitario', '2', 'profilePic.png', 0),
+(25, 'Rosa', 'Soto', '2001-12-12', 'Terciario', '2', 'profilePic.png', 0),
 (26, 'Enrique', 'Suárez', '1990-01-01', 'Primario', '3', 'profilePic.png', 0),
 (27, 'Beatriz', 'Delgado', '1991-02-02', 'Secundario', '3', 'profilePic.png', 0),
 (28, 'Víctor', 'Medina', '1992-03-03', 'Universitario', '3', 'profilePic.png', 0),
@@ -286,15 +282,6 @@ ALTER TABLE `user_data`
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `student_groups`
---
-ALTER TABLE `student_groups`
-  ADD CONSTRAINT `student_groups_ibfk_1` FOREIGN KEY (`id_student1`) REFERENCES `user_data` (`id_data`),
-  ADD CONSTRAINT `student_groups_ibfk_2` FOREIGN KEY (`id_student2`) REFERENCES `user_data` (`id_data`),
-  ADD CONSTRAINT `student_groups_ibfk_3` FOREIGN KEY (`id_student3`) REFERENCES `user_data` (`id_data`),
-  ADD CONSTRAINT `student_groups_ibfk_4` FOREIGN KEY (`id_student4`) REFERENCES `user_data` (`id_data`);
 
 --
 -- Filtros para la tabla `unsubscribe_request`

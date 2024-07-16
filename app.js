@@ -205,7 +205,6 @@ app.get('/denyRequest/:id', function (req, res) {
 
 // aprobar solicitud de baja
 app.get('/approveUnsubscribe/:id', function (req, res) {
-
     const requestId = req.params.id;
 
     let query = 'SELECT * FROM unsubscribe_request WHERE id_request = ?';
@@ -213,25 +212,39 @@ app.get('/approveUnsubscribe/:id', function (req, res) {
         if (err) throw err;
 
         const request = results[0];
-
-        query = 'DELETE FROM unsubscribe_request WHERE id_request = ?';
-        conexion.query(query, [requestId], function (err) {
+        
+        query = `
+            UPDATE student_groups 
+            SET 
+                id_student1 = CASE WHEN id_student1 = ? THEN NULL ELSE id_student1 END,
+                id_student2 = CASE WHEN id_student2 = ? THEN NULL ELSE id_student2 END,
+                id_student3 = CASE WHEN id_student3 = ? THEN NULL ELSE id_student3 END,
+                id_student4 = CASE WHEN id_student4 = ? THEN NULL ELSE id_student4 END
+            WHERE id_student1 = ? OR id_student2 = ? OR id_student3 = ? OR id_student4 = ?
+        `;
+        conexion.query(query, [request.id_data, request.id_data, request.id_data, request.id_data, request.id_data, request.id_data], function (err) {
             if (err) throw err;
-            
-            query = 'DELETE FROM user WHERE id_user = ?';
-            conexion.query(query, [request.id_user], function (err) {
+
+            query = 'DELETE FROM unsubscribe_request WHERE id_request = ?';
+            conexion.query(query, [requestId], function (err) {
                 if (err) throw err;
 
-                query = 'DELETE FROM user_data WHERE id_data = ?';
-                conexion.query(query, [request.id_data], function (err) {
+                query = 'DELETE FROM user WHERE id_user = ?';
+                conexion.query(query, [request.id_user], function (err) {
                     if (err) throw err;
 
-                    res.redirect('/admin');
+                    query = 'DELETE FROM user_data WHERE id_data = ?';
+                    conexion.query(query, [request.id_data], function (err) {
+                        if (err) throw err;
+
+                        res.redirect('/admin');
+                    });
                 });
             });
         });
     });
 });
+
 
 // registrar profesor
 app.post('/registerTeacher', function (req, res) {
